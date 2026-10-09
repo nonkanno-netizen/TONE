@@ -86,4 +86,96 @@ button:hover{filter:brightness(.98)}
 
 <script>
 const questions = [
- {q:"予定が急にキャンセルになったら？",a:"残念！楽し
+ {q:"予定が急にキャンセルになったら？",a:"残念！楽しみにしていたのに",b:"自由時間ができた！"},
+ {q:"人から褒められたら？",a:"素直にうれしい！",b:"本当かな？と少し考える"},
+ {q:"誰かに嫌なことをされたら？",a:"まず感情が動く",b:"どうしてそうしたのか考える"},
+ {q:"やることがたくさんあるときは？",a:"まずできることから始める",b:"順番や段取りを考えてから始める"},
+ {q:"友達から急に遊びに誘われたら？",a:"楽しそう！とすぐ乗り気になる",b:"予定や気分を少し考える"},
+ {q:"出発時間なのに準備が終わっていない！",a:"多少足りなくても出発する",b:"できるだけ準備を終えてから出る"},
+ {q:"LINEの返信がなかなか来ないときは？",a:"忙しいのかな、とあまり気にしない",b:"何かあったのかな、と気になる"},
+ {q:"誰かにお願いをされたら？",a:"つい引き受けてしまう",b:"自分の都合も考えて決める"},
+ {q:"好きな人から急に『会いたい』と言われたら？",a:"うれしい！会いたい！",b:"どうしたんだろう？と少し考える"},
+ {q:"自分に近いのはどっち？",a:"考えるより、まず動いてみる",b:"動く前に、いろいろ考える"}
+];
+
+let current=0, answers=[];
+
+function begin(){
+ current=0;
+ answers=[];
+ document.getElementById("start").classList.add("hidden");
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("quiz").classList.remove("hidden");
+ showQuestion();
+}
+
+function showQuestion(){
+ const q=questions[current];
+ document.getElementById("count").textContent="QUESTION "+(current+1)+" / "+questions.length;
+ document.getElementById("bar").style.width=(current/questions.length*100)+"%";
+ document.getElementById("question").textContent=q.q;
+ document.getElementById("a").textContent="A　"+q.a;
+ document.getElementById("b").textContent="B　"+q.b;
+}
+
+function answer(n){
+ answers.push(n);
+ current++;
+ if(current<questions.length){
+  showQuestion();
+ }else{
+  showResult();
+ }
+}
+
+function showResult(){
+ document.getElementById("quiz").classList.add("hidden");
+ document.getElementById("result").classList.remove("hidden");
+
+ const a=answers.filter(x=>x===0).length;
+ let icon,type,desc,tags;
+
+ if(a>=7){
+  icon="⚡";
+  type="直感アクションTONE";
+  desc="あなたは、気持ちやひらめきを大切にして動けるタイプ。チャンスをつかむ行動力や、素直なリアクションが魅力です。考えすぎずに一歩を踏み出せる反面、勢いで決めてしまうことも。ときどき立ち止まると、さらに自分らしさが輝きそう！";
+  tags=["行動力","素直さ","ひらめき"];
+ }else if(a<=3){
+  icon="🧠";
+  type="じっくり思考TONE";
+  desc="あなたは、状況や相手の気持ちを考えながら判断するタイプ。慎重さや、物事を深く考えられるところが魅力です。先を見通して行動できる一方、考えすぎて疲れることも。完璧な答えが出る前に動いてみるのもおすすめです。";
+  tags=["慎重さ","分析力","計画性"];
+ }else{
+  icon="🌿";
+  type="バランスTONE";
+  desc="あなたは、直感と慎重さを状況に合わせて使い分けるタイプ。柔軟に考えられるところが魅力です。相手や場面に合わせて行動できる一方、自分の本音が後回しになることも。ときには自分がどうしたいかを一番に考えてみてね。";
+  tags=["柔軟性","バランス感覚","適応力"];
+ }
+
+ document.getElementById("icon").textContent=icon;
+ document.getElementById("type").textContent=type;
+ document.getElementById("desc").textContent=desc;
+ document.getElementById("tags").innerHTML=tags.map(t=>'<span class="tag">'+t+'</span>').join("");
+ document.getElementById("bar").style.width="100%";
+}
+
+function restart(){
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("start").classList.remove("hidden");
+}
+
+function shareResult(){
+ const text="私のTONE診断結果は「"+document.getElementById("type").textContent+"」！\nあなたらしさ発見テスト 🌷";
+ if(navigator.share){
+  navigator.share({title:"TONE診断",text:text}).catch(()=>{});
+ }else if(navigator.clipboard){
+  navigator.clipboard.writeText(text)
+   .then(()=>alert("結果をコピーしたよ！LINEなどに貼り付けてね。"))
+   .catch(()=>prompt("この結果をコピーしてね",text));
+ }else{
+  prompt("この結果をコピーしてね",text);
+ }
+}
+</script>
+</body>
+</html>
