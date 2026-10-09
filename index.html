@@ -301,4 +301,37 @@ $('resultBody').innerHTML=`
 <div class="small">${y.ja}</div>
 </div>
 </div>
-<div style="text-align:center;margin:
+<div style="text-align:center;margin:22px 0">
+<div class="score">${score}<span style="font-size:16px"> / 100</span></div>
+<div class="desc">相性の目安（ゲーム内スコア）</div>
+</div>
+<h3>${rel}</h3>
+<p>${shared?
+'ふたりは似た感覚を持ちやすい組み合わせ。安心感がある一方、同じところで迷うことも。':
+secondary?
+'大切にしていることに共通点がありそう。似ている部分をきっかけに、違いも楽しく知っていけそう。':
+'得意なことや感じ方に違いがありそう。相手を自分と同じにしようとせず、違いを役割分担に変えるのがコツ。'}</p>
+<p class="desc">Aさん：${x.care}<br>Bさん：${y.care}</p>
+<p class="small">※このスコアは10問の回答から作ったお試し版の目安で、科学的な相性判定ではありません。</p>`;
+}
+
+$('share').onclick=async()=>{
+try{
+await navigator.clipboard.writeText(lastText);
+$('shareNote').textContent='コピーできたよ！メッセージなどに貼り付けてシェアしてね。';
+}catch(e){
+$('shareNote').textContent=lastText+'（この文章を選択してコピーしてね）';
+}
+};
+
+$('restart').onclick=()=>{
+answers=[];
+aAnswers=[];
+aType=null;
+bType=null;
+person='A';
+show('home');
+};
+</script>
+</body>
+</html>
