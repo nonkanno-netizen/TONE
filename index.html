@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TONE｜あなたらしさ発見テスト</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Hiragino Sans","Meiryo",sans-serif;
+  background:linear-gradient(145deg,#fff5f0,#f5f0ff,#edf8f1);
+  color:#51485c;
+  min-height:100vh;
+  padding:24px 14px;
+}
+main{
+  max-width:600px;
+  margin:auto;
+  background:#ffffffed;
+  border-radius:26px;
+  padding:26px 20px;
+  box-shadow:0 8px 30px #82739b18;
+}
+.logo{text-align:center;font-size:13px;letter-spacing:5px;color:#a18bb9}
+h1{text-align:center;font-size:32px;margin:10px 0;color:#75618d}
+.sub{text-align:center;line-height:1.9;font-size:14px}
+.mascot{text-align:center;font-size:54px;margin:18px}
+button{
+  font:inherit;cursor:pointer;border:0;border-radius:16px;
+  padding:15px;width:100%;margin-top:12px;
+  background:#dcd0f3;color:#57466d;font-weight:bold;
+}
+button:hover{filter:brightness(.98)}
+.primary{background:#9982c2;color:white}
+.progress{height:7px;background:#eee8f5;border-radius:9px;margin:20px 0}
+.bar{height:7px;background:#b9a4dc;border-radius:9px;width:0}
+.question{font-size:19px;line-height:1.7;font-weight:bold;margin:24px 0}
+.answer{
+  display:block;text-align:left;background:#fff8f5;
+  border:2px solid #f1e5e2;color:#51485c;
+}
+.answer:hover{border-color:#c4addd;background:#faf5ff}
+.small{text-align:center;font-size:12px;color:#978da0;margin-top:18px}
+.result{text-align:center}
+.typeIcon{font-size:64px;margin:12px}
+.typeName{font-size:25px;color:#8069a2;font-weight:bold}
+.description{line-height:1.9;text-align:left;background:#faf6ff;padding:18px;border-radius:16px;margin:20px 0}
+.tag{display:inline-block;background:#f2eafa;padding:7px 12px;border-radius:20px;margin:4px;font-size:13px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">T O N E</div>
+  <h1>あなたらしさ発見テスト</h1>
+  <p class="sub">10個の質問から見つける、<br>あなたの考え方と行動のTONE 🌷</p>
+
+  <section id="start">
+    <div class="mascot">🌈</div>
+    <p class="sub">直感で選んでOK！<br>正解・不正解はありません。<br>今の自分に近い方を選んでね。</p>
+    <button class="primary" onclick="begin()">診断スタート ✨</button>
+    <p class="small">TONE MONITOR VERSION</p>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div id="count"></div>
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <div id="question" class="question"></div>
+    <button class="answer" id="a" onclick="answer(0)"></button>
+    <button class="answer" id="b" onclick="answer(1)"></button>
+    <p class="small">迷ったら、より自分らしい方を選んでね。</p>
+  </section>
+
+  <section id="result" class="hidden result">
+    <div class="typeIcon" id="icon"></div>
+    <p>あなたのTONEは…</p>
+    <div class="typeName" id="type"></div>
+    <div class="description" id="desc"></div>
+    <div id="tags"></div>
+    <p class="small">※モニター版の簡易診断です。性格を決めつけるものではありません。</p>
+    <button class="primary" onclick="shareResult()">結果をシェアする 💌</button>
+    <button onclick="restart()">もう一度診断する</button>
+  </section>
+</main>
+
+<script>
+const questions = [
+ {q:"予定が急にキャンセルになったら？",a:"残念！楽し
