@@ -1,689 +1,304 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TONE｜自分らしさとふたりの相性診断</title>
-<meta name="description" content="TONEの10問診断。自分らしさや、ふたりの相性を楽しく発見しよう。">
+<title>TONE｜あなたらしさを見つける2択テスト</title>
 <style>
-:root {
-  --ink:#51465d; --muted:#8b8197; --purple:#8b73bd;
-  --lavender:#f0e9fb; --pink:#fae8ef; --green:#eaf4ec;
-  --cream:#fffaf4; --line:#e8deef;
-}
-* {box-sizing:border-box}
-body {
-  margin:0;padding:16px 10px 30px;color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
-  line-height:1.8;
-  background:radial-gradient(ellipse at 8% 12%,#f5eafa,transparent 32%),
-  radial-gradient(ellipse at 95% 40%,#fcecf0,transparent 30%),
-  linear-gradient(145deg,#fcf8ff,#fffaf5 60%,#f4faf6);
-}
-button,input {font:inherit}
-button {cursor:pointer}
-button:focus-visible,input:focus-visible {outline:3px solid #ad91d8;outline-offset:3px}
-.container {max-width:660px;margin:auto}
-header {text-align:center;padding:5px 0 18px}
-.logo {font-size:39px;font-weight:850;letter-spacing:9px;color:var(--purple);padding-left:9px;line-height:1.3}
-.tagline {font-size:12px;letter-spacing:1.5px;color:var(--muted)}
-.card {background:rgba(255,255,255,.93);border:1px solid #eee5f2;border-radius:26px;padding:23px 21px;box-shadow:0 12px 34px #5c467712;overflow:hidden}
-h1 {font-size:25px;line-height:1.55;margin:0 0 10px}
-h2 {font-size:22px;line-height:1.55;margin:0 0 12px}
-h3 {font-size:16px;line-height:1.5;margin:0 0 6px}
-p {margin:8px 0 14px}
-.center {text-align:center}
-.muted,.small {font-size:12px;color:var(--muted)}
-.pill {display:inline-block;padding:4px 13px;border-radius:30px;background:var(--lavender);color:#8068ad;font-size:11px;letter-spacing:1px;margin-bottom:12px}
-.art {width:100%;max-width:310px;height:auto;display:block;margin:0 auto 8px}
-.art-small {width:100px;height:auto;display:block;margin:0 auto 7px}
-.primary,.secondary,.choice {
-  display:block;width:100%;border-radius:16px;padding:13px 15px;
-  transition:background .15s,transform .15s;
-}
-.primary {background:var(--purple);color:white;border:0;font-weight:700;margin-top:12px;box-shadow:0 5px 12px #8b73bd2e}
-.primary:hover {background:#7760a6}
-.secondary {background:white;color:#7d66a8;border:1px solid #e0d3ed;font-weight:600;margin-top:9px}
-.secondary:hover {background:#faf6ff}
-.choice {display:flex;align-items:center;gap:12px;text-align:left;background:white;color:var(--ink);border:1px solid var(--line);margin-top:12px;min-height:68px}
-.choice:hover {background:#faf6ff;border-color:#c8b6e0}
-.letter {width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:50%;background:var(--lavender);color:#8067aa;font-weight:800}
-.choice-text {flex:1}
-.hidden {display:none!important}
-.progress-wrap {margin-bottom:20px}
-.progress-label {display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}
-.progress {height:7px;border-radius:10px;background:#eee7f3;overflow:hidden}
-.progress-bar {height:100%;width:0;border-radius:10px;background:linear-gradient(90deg,#b7a0df,#e5a9c4);transition:width .25s}
-.question {font-size:21px;line-height:1.65;margin:8px 0 16px}
-.question-art {display:block;width:145px;height:auto;margin:0 auto 10px}
-.option-card {border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;margin-top:12px}
-.option-card label {display:block;font-size:13px;margin-bottom:5px;color:var(--muted)}
-.option-card input {width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;color:var(--ink);background:#fff}
-.result-hero {text-align:center;border-radius:22px;padding:18px 16px 22px;background:linear-gradient(145deg,#f0e8fb,#fff0f4 70%,#fff9ec);border:1px solid #f0e5f4;margin:15px 0}
-.result-hero h2 {color:#795da6;font-size:24px}
-.result-section {padding:16px 17px;border-radius:18px;margin-top:13px}
-.result-section p {margin:5px 0 0}
-.strength {background:#f1eafb}
-.relationship {background:#eaf5ed}
-.love {background:#fbedf2}
-.score {font-size:46px;line-height:1.25;font-weight:800;color:#8569b0;margin:5px 0}
-.score small {font-size:16px}
-.match-row {display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #ffffffb0}
-.match-row:last-child {border-bottom:0}
-.match-icon {font-size:22px;flex:0 0 30px}
-.share-panel {border:1px dashed #cbb9e0;border-radius:19px;padding:16px;margin-top:20px;background:#fdfaff}
-.footer {text-align:center;color:var(--muted);font-size:11px;padding:20px 0 0}
-.footer-flower {width:55px;height:auto;display:block;margin:0 auto 4px}
-@media(max-width:420px) {
-  .card {padding:20px 14px;border-radius:23px}
-  h1 {font-size:23px}.question {font-size:20px}.logo {font-size:36px}
-}
+:root{--ink:#45424b;--muted:#77727e;--paper:#fffdfb;--rose:#bd8295;--lav:#9a8ab9;--gold:#c7a65c;--sage:#819b83;--blue:#7896b5;--teal:#70a9a5;--line:#eee7e7}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#faf3f3,#f7f5fb 55%,#f4f8f5);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--ink);line-height:1.75}
+.wrap{width:min(760px,100%);margin:auto;padding:24px 16px 48px}
+.brand{font-size:13px;letter-spacing:.25em;color:#9a8795;text-align:center;margin:8px 0}
+.hero{text-align:center;padding:24px 10px 28px}
+.logo{font-family:Georgia,serif;font-size:52px;letter-spacing:.18em;margin:0;color:#8f7e8d}
+.hero p{color:var(--muted);font-size:14px;margin:8px 0 0}
+.panel{background:#fffdfcf2;border:1px solid #fff;border-radius:24px;padding:24px;box-shadow:0 12px 35px #62516a0c;margin:14px 0}
+.eyebrow{font-size:11px;letter-spacing:.15em;color:#a18b9b;font-weight:700}
+.h2{font-size:22px;line-height:1.5;margin:6px 0 12px}
+.desc{font-size:14px;color:var(--muted)}
+button,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:14px;padding:13px 18px;transition:transform .15s,opacity .15s}
+button:hover{transform:translateY(-1px)}
+.primary{background:#8f7e8d;color:white;width:100%;font-weight:700;margin-top:16px}
+.secondary{background:#f4eef2;color:#766474}
+.choices{display:grid;gap:12px;margin-top:18px}
+.choice{width:100%;text-align:left;background:#fff;border:1px solid var(--line);padding:16px;border-radius:16px;color:var(--ink)}
+.choice:hover{border-color:#c7b5c4;background:#fdf9fc}
+.choice strong{display:block;font-size:15px;margin-bottom:4px}
+.choice span{font-size:13px;color:var(--muted)}
+.progress{height:5px;background:#f0e9ee;border-radius:9px;overflow:hidden;margin:14px 0 22px}
+.bar{height:100%;background:linear-gradient(90deg,#c69bad,#a6a2c8,#8db7ad);width:0;transition:width .25s}
+.hidden{display:none!important}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row button{flex:1;min-width:140px}
+.type-head{display:flex;gap:16px;align-items:center}
+.symbol{width:76px;height:76px;display:grid;place-items:center;border-radius:24px;font-size:39px;flex-shrink:0}
+.type-name{font-size:28px;line-height:1.25;margin:2px 0}
+.type-kicker{font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.meter{height:8px;border-radius:8px;background:#f0edef;overflow:hidden;margin:8px 0 14px}
+.meter div{height:100%;border-radius:8px}
+.pill{display:inline-block;border-radius:999px;padding:4px 10px;background:#f5eff3;color:#796979;font-size:12px;margin:3px 3px 3px 0}
+.question-num{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.small{font-size:12px;color:var(--muted)}
+select{border:1px solid var(--line);border-radius:12px;background:white;padding:10px;width:100%;margin:8px 0 4px;color:var(--ink)}
+.score{font-size:40px;font-weight:700;line-height:1.2;color:#927f91}
+.type-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini{border:1px solid var(--line);border-radius:18px;padding:14px;text-align:center;background:white}
+.mini .symbol{margin:auto;width:56px;height:56px;font-size:29px;border-radius:18px}
+.mini b{display:block;margin-top:8px}
+.footer{text-align:center;color:#a49aa4;font-size:11px;margin-top:24px}
+@media(max-width:480px){.panel{padding:19px}.logo{font-size:45px}.type-head{align-items:flex-start}.symbol{width:64px;height:64px;font-size:33px}.type-name{font-size:24px}.type-pair{gap:8px}}
 </style>
 </head>
 <body>
-<div class="container">
-<header>
-  <div class="logo">TONE</div>
-  <div class="tagline">FIND YOUR OWN TONE</div>
+<main class="wrap">
+<div class="brand">FIND YOUR TONE</div>
+<header class="hero">
+<h1 class="logo">TONE</h1>
+<p>ちがいを知ると、自分にも相手にもやさしくなれる。</p>
 </header>
 
-<main class="card">
-
-<!-- トップ -->
-<section id="startScreen" class="center">
-  <span class="pill">FIND YOUR OWN TONE</span>
-  <svg class="art" viewBox="0 0 320 205" role="img" aria-label="パステルカラーのお花と星">
-    <circle cx="160" cy="103" r="76" fill="#f7effd"/>
-    <circle cx="160" cy="103" r="54" fill="#fff8ef"/>
-    <path d="M75 44l5 13 14 2-11 9 3 14-11-8-12 8 4-14-11-9 14-2z" fill="#f5d58c"/>
-    <path d="M243 39l4 10 11 2-9 7 2 11-8-6-9 6 3-11-9-7 11-2z" fill="#d9c8f4"/>
-    <path d="M250 117l3 7 8 2-7 5 2 8-6-5-7 5 2-8-6-5 8-2z" fill="#f4bfd1"/>
-    <path d="M156 179Q137 145 115 130M191 180Q194 150 213 132" fill="none" stroke="#9dbda3" stroke-width="3" stroke-linecap="round"/>
-    <path d="M141 157Q116 153 111 135Q134 136 141 157M150 169Q154 144 176 139Q175 161 150 169M199 158Q216 148 218 132Q199 137 199 158" fill="#b9d8bd"/>
-    <g transform="translate(111 116)">
-      <ellipse cy="-14" rx="9" ry="14" fill="#f3bfd3"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f8d4e0" transform="rotate(60)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f3bfd3" transform="rotate(120)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f8d4e0" transform="rotate(180)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f3bfd3" transform="rotate(240)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f8d4e0" transform="rotate(300)"/>
-      <circle r="10" fill="#f3d17d"/>
-    </g>
-    <g transform="translate(160 87)">
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(45)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4" transform="rotate(90)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(135)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4" transform="rotate(180)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(225)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4" transform="rotate(270)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(315)"/>
-      <circle r="15" fill="#f5d88d"/>
-    </g>
-    <g transform="translate(213 121)">
-      <ellipse cy="-12" rx="8" ry="12" fill="#f6d5a4"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#fce6bc" transform="rotate(60)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#f6d5a4" transform="rotate(120)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#fce6bc" transform="rotate(180)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#f6d5a4" transform="rotate(240)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#fce6bc" transform="rotate(300)"/>
-      <circle r="8" fill="#e9c878"/>
-    </g>
-  </svg>
-  <h1>あなたらしさと、<br>ふたりの相性を見つけよう</h1>
-  <p>10問の2択で、自分のことや大切な人との関係を楽しく発見。</p>
-  <p class="muted">正解も不正解もないから、直感で選んでね。</p>
-  <button class="primary" id="soloStart">🌷 ひとりで診断する</button>
-  <button class="secondary" id="pairStart">💕 ふたりで相性診断</button>
-  <p class="small">ふたり診断は、同じ端末で順番に回答するお試し版です。</p>
+<section id="home" class="panel">
+<div class="eyebrow">A LITTLE SELF-DISCOVERY</div>
+<h2 class="h2">あなたらしさを、気軽な2択から。</h2>
+<p class="desc">正解・不正解はありません。今の自分に近い方を直感で選んでね。結果は性格を決めつけるものではなく、自分や相手を知るヒントです。</p>
+<label for="mode" class="eyebrow">テストの種類</label>
+<select id="mode">
+<option value="solo">ひとりで診断する</option>
+<option value="pair">ふたりの相性をみる（同じ端末）</option>
+</select>
+<label for="relation" class="eyebrow">ふたりの関係（相性テストの場合）</label>
+<select id="relation">
+<option value="romance">恋愛・パートナー</option>
+<option value="friend">友達・家族・仕事仲間</option>
+</select>
+<button class="primary" id="start">診断をはじめる →</button>
 </section>
 
-<!-- ふたり診断の設定 -->
-<section id="pairSetup" class="hidden">
-  <div class="center">
-    <span class="pill">TWO PEOPLE · ONE TONE</span>
-    <h1>ふたりの相性診断</h1>
-    <p>お互いの回答をもとに、ふたりの共通点や違いを見つけよう。</p>
-  </div>
-  <div class="option-card">
-    <label for="personA">1人目の呼び名</label>
-    <input id="personA" maxlength="20" placeholder="例：Aさん">
-  </div>
-  <div class="option-card">
-    <label for="personB">2人目の呼び名</label>
-    <input id="personB" maxlength="20" placeholder="例：Bさん">
-  </div>
-  <p class="small">名前はニックネームでOK。入力した名前はこの診断結果の表示にだけ使います。</p>
-  <h3>どんなふたりで診断する？</h3>
-  <button class="choice" data-kind="love"><span class="letter">♡</span><span class="choice-text">恋人・気になる人との相性</span></button>
-  <button class="choice" data-kind="friend"><span class="letter">✿</span><span class="choice-text">友達・家族などの相性</span></button>
-  <button class="secondary" id="setupBack">トップに戻る</button>
+<section id="quiz" class="panel hidden">
+<div class="question-num"><span id="qnum">QUESTION 01 / 10</span><span>直感でOK</span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<h2 class="h2" id="qtext"></h2>
+<div class="choices" id="choices"></div>
+<p class="small">迷ったら「より自分に近いかも」で選んでね。</p>
 </section>
 
-<!-- 質問 -->
-<section id="quizScreen" class="hidden">
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span id="questionCount">QUESTION 1 / 10</span>
-      <span id="progressPercent">10%</span>
-    </div>
-    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-  </div>
-  <div class="center">
-    <svg class="question-art" viewBox="0 0 160 105" role="img" aria-label="小さなお花ときらめき">
-      <circle cx="80" cy="53" r="39" fill="#f8f0fc"/>
-      <path d="M80 84V44" stroke="#9fbea2" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M80 72Q59 69 57 52Q76 53 80 72M80 63Q98 58 102 43Q85 44 80 63" fill="#c7e0c5"/>
-      <g transform="translate(80 36)">
-        <ellipse cy="-12" rx="8" ry="12" fill="#d8c5f2"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#eadcf8" transform="rotate(60)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#d8c5f2" transform="rotate(120)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#eadcf8" transform="rotate(180)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#d8c5f2" transform="rotate(240)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#eadcf8" transform="rotate(300)"/>
-        <circle r="8" fill="#f4d582"/>
-      </g>
-      <path d="M35 22l3 7 7 2-7 3-3 7-3-7-7-3 7-2z" fill="#f1c4d7"/>
-      <path d="M124 18l3 7 7 2-7 3-3 7-3-7-7-3 7-2z" fill="#cdb8ec"/>
-      <circle cx="119" cy="76" r="3" fill="#f0d68c"/>
-    </svg>
-    <span class="pill" id="categoryLabel">行動スタイル</span>
-    <p id="whoLabel" class="small"></p>
-  </div>
-  <h2 class="question" id="questionText"></h2>
-  <button class="choice" id="choiceA"><span class="letter">A</span><span class="choice-text" id="choiceAText"></span></button>
-  <button class="choice" id="choiceB"><span class="letter">B</span><span class="choice-text" id="choiceBText"></span></button>
-  <p class="small center">🌼 深く考えすぎず、直感で選んでみてね。</p>
+<section id="pass" class="panel hidden">
+<div class="eyebrow">PASS THE PHONE</div>
+<h2 class="h2">Aさんの回答、おつかれさま！</h2>
+<p class="desc">回答を保存したよ。ここで端末をBさんに渡してね。Bさんは自分の感覚で答えてください。</p>
+<button class="primary" id="startB">Bさんの診断をはじめる →</button>
 </section>
 
-<!-- 1人目完了 -->
-<section id="betweenScreen" class="hidden center">
-  <svg class="art-small" viewBox="0 0 120 85" aria-hidden="true">
-    <path d="M60 68C54 61 34 47 39 33C43 21 57 26 60 36C65 25 80 22 84 34C89 47 69 62 60 68Z" fill="#f2c4d7"/>
-    <path d="M25 15l4 10 10 3-10 4-4 10-4-10-10-4 10-3z" fill="#e9c8f2"/>
-    <path d="M94 12l3 8 8 2-8 3-3 8-3-8-8-3 8-2z" fill="#f0d38c"/>
-  </svg>
-  <h1 id="betweenTitle">1人目の回答完了！</h1>
-  <p id="betweenText">次の人に交代してね。</p>
-  <p class="muted">相手の回答をのぞかず、それぞれ直感で答えるのがおすすめ。</p>
-  <button class="primary" id="nextPersonBtn">2人目の診断を始める</button>
-  <button class="secondary" id="cancelPairBtn">トップに戻る</button>
-</section>
-
-<!-- 結果 -->
-<section id="resultScreen" class="hidden">
-  <div class="center">
-    <svg class="art" viewBox="0 0 260 115" role="img" aria-label="お花と星の飾り">
-      <path d="M30 64l4 10 10 3-10 4-4 10-4-10-10-4 10-3z" fill="#eac4d7"/>
-      <path d="M222 23l4 10 10 3-10 4-4 10-4-10-10-4 10-3z" fill="#cbb8eb"/>
-      <g transform="translate(75 60)">
-        <ellipse cy="-12" rx="8" ry="12" fill="#f3bfd3"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#f9dce6" transform="rotate(60)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#f3bfd3" transform="rotate(120)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#f9dce6" transform="rotate(180)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#f3bfd3" transform="rotate(240)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#f9dce6" transform="rotate(300)"/>
-        <circle r="8" fill="#f3d37e"/>
-      </g>
-      <g transform="translate(130 49)">
-        <ellipse cy="-17" rx="11" ry="16" fill="#d9c9f3"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#eadff8" transform="rotate(45)"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#d9c9f3" transform="rotate(90)"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#eadff8" transform="rotate(135)"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#d9c9f3" transform="rotate(180)"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#eadff8" transform="rotate(225)"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#d9c9f3" transform="rotate(270)"/>
-        <ellipse cy="-17" rx="11" ry="16" fill="#eadff8" transform="rotate(315)"/>
-        <circle r="12" fill="#f5d98c"/>
-      </g>
-    </svg>
-    <span class="pill" id="resultPill">YOUR TONE</span>
-    <h1 id="resultHeading">あなたの診断結果</h1>
-  </div>
-
-  <div class="result-hero">
-    <div id="scoreArea" class="hidden">
-      <div class="muted">ふたりの相性スコア</div>
-      <div class="score"><span id="scoreValue">80</span><small> / 100</small></div>
-      <div id="scoreMessage"></div>
-    </div>
-    <p class="muted" id="resultNames"></p>
-    <h2 id="resultTitle"></h2>
-    <p id="resultDescription"></p>
-  </div>
-
-  <div id="soloSections">
-    <div class="result-section strength">
-      <h3>✧ あなたの隠れた強み</h3>
-      <h3 id="strengthTitle"></h3><p id="strengthText"></p>
-    </div>
-    <div class="result-section relationship">
-      <h3>✧ 人間関係のアドバイス</h3>
-      <h3 id="relationshipTitle"></h3><p id="relationshipTip"></p>
-    </div>
-    <div class="result-section love">
-      <h3>✧ 恋愛アドバイス</h3>
-      <h3 id="loveTitle"></h3><p id="loveTip"></p>
-    </div>
-  </div>
-
-  <div id="pairSections" class="hidden">
-    <div class="result-section strength">
-      <h3>✧ ふたりの共通点</h3>
-      <p id="commonText"></p>
-    </div>
-    <div class="result-section relationship">
-      <h3>✧ 違いを知ると、もっと仲良く</h3>
-      <div id="differences"></div>
-    </div>
-    <div class="result-section love">
-      <h3 id="pairAdviceHeading">✧ ふたりへのアドバイス</h3>
-      <p id="pairAdvice"></p>
-    </div>
-  </div>
-
-  <div class="share-panel">
-    <div class="center">
-      <h3>🌷 結果をシェアしよう</h3>
-      <p class="muted">友達や大切な人にもTONEを紹介してね。</p>
-    </div>
-    <button class="primary" id="shareBtn">♡ 結果をシェアする</button>
-    <button class="secondary" id="copyResultBtn">結果とURLをコピー</button>
-    <button class="secondary" id="copyUrlBtn">TONEのURLをコピー</button>
-    <p id="shareStatus" class="small center" role="status" aria-live="polite"></p>
-  </div>
-  <button class="secondary" id="restartBtn">もう一度診断する ↻</button>
-  <button class="secondary" id="homeBtn">最初の画面に戻る</button>
-  <p class="small center">この診断は自己理解や会話を楽しむためのものです。相性を科学的に測定したり、関係の将来を保証したりするものではありません。</p>
-</section>
-
-</main>
-<footer class="footer">
-  <svg class="footer-flower" viewBox="0 0 55 40" aria-hidden="true">
-    <path d="M27 38V23" stroke="#9cbd9e" stroke-width="2"/>
-    <path d="M27 33Q13 32 13 23Q25 24 27 33" fill="#c9e0c5"/>
-    <g transform="translate(27 15)">
-      <ellipse cy="-7" rx="5" ry="7" fill="#d9c9f2"/>
-      <ellipse cy="-7" rx="5" ry="7" fill="#f2d5e1" transform="rotate(60)"/>
-      <ellipse cy="-7" rx="5" ry="7" fill="#d9c9f2" transform="rotate(120)"/>
-      <ellipse cy="-7" rx="5" ry="7" fill="#f2d5e1" transform="rotate(180)"/>
-      <ellipse cy="-7" rx="5" ry="7" fill="#d9c9f2" transform="rotate(240)"/>
-      <ellipse cy="-7" rx="5" ry="7" fill="#f2d5e1" transform="rotate(300)"/>
-      <circle r="5" fill="#f2d48b"/>
-    </g>
-  </svg>
-  TONE · Find your own tone.
-</footer>
+<section id="result" class="panel hidden">
+<div class="eyebrow">YOUR TONE</div>
+<div id="resultBody"></div>
+<div class="row" style="margin-top:20px">
+<button class="secondary" id="share">結果をコピー</button>
+<button class="secondary" id="restart">もう一度診断</button>
 </div>
+<p class="small" id="shareNote">結果をコピーして、友達にシェアできるよ。</p>
+</section>
+
+<div class="footer">TONE · A small game to understand each other</div>
+</main>
 
 <script>
-const questions = [
- {category:"行動スタイル",question:"出かける準備が予定より早く終わった。出発まで30分ある。",A:"忘れ物がないか、もう一度確認する",B:"お茶でも飲みながらゆっくり待つ",dimension:"action"},
- {category:"気持ちの表し方",question:"誰かに「すごいね！」と褒められたら？",A:"素直にうれしい！と伝える",B:"照れて、つい控えめな反応になる",dimension:"emotion"},
- {category:"人との関わり方",question:"仲のいい人に、ちょっと嫌なことをされたら？",A:"できるだけ早めに自分の気持ちを伝える",B:"まずは様子を見て、自分の中で整理する",dimension:"relationship"},
- {category:"行動スタイル",question:"やることがいくつか重なっているときは？",A:"順番や優先順位を決めて進める",B:"そのときの気分や流れに合わせて進める",dimension:"action"},
- {category:"人との距離感",question:"友達から「今から会わない？」と急に誘われたら？",A:"予定が合えば、気軽に出かける",B:"急な予定変更は苦手。前もって決めたい",dimension:"distance"},
- {category:"人との距離感",question:"悩みごとがあるとき、あなたは？",A:"誰かに話して、気持ちを整理したい",B:"まずは自分ひとりで考える時間がほしい",dimension:"distance"},
- {category:"気持ちの表し方",question:"大切な人と意見が食い違ったら？",A:"話し合って、お互いの考えを知りたい",B:"少し時間を置いて、落ち着いてから考えたい",dimension:"emotion"},
- {category:"人との関わり方",question:"友達が元気のない様子。あなたなら？",A:"声をかけて、話を聞こうとする",B:"無理に聞かず、相手のタイミングを待つ",dimension:"relationship"},
- {category:"恋愛スタイル",question:"気になる人から連絡がなかなか来ないときは？",A:"自分から連絡してみる",B:"相手の都合もあると思い、少し待つ",dimension:"love"},
- {category:"恋愛スタイル",question:"好きな人との理想の過ごし方は？",A:"一緒にいろいろな体験を楽しみたい",B:"気を使わず、自然体でゆっくり過ごしたい",dimension:"love"}
+const qs=[
+['出かける準備が予定より早く終わった。出発まで30分ある。','忘れ物がないか、もう一度確認する','お茶でも飲みながらゆっくり待つ','LEAF','MOON'],
+['友達から急に「今から会える？」と連絡が来た。','面白そう！行けるならすぐ準備する','予定や気分を確認してから決める','SUN','MOON'],
+['誰かに褒められたとき、いちばん近い反応は？','うれしい！気持ちをそのまま伝える','照れつつ、どこがよかったか考える','ROSE','STAR'],
+['苦手だなと思うことを頼まれたら？','できる範囲を整理して誠実に対応する','やり方を工夫して負担を減らす','LEAF','WAVE'],
+['予定が急に変更になったら？','新しい予定も楽しめるよう切り替える','まず気持ちや段取りを整えたい','SUN','MOON'],
+['友達が落ち込んでいるときは？','気持ちに寄り添って話を聞く','別の視点やアイデアを一緒に探す','ROSE','STAR'],
+['休日の過ごし方、理想に近いのは？','気分に合わせて自由に過ごす','ひとり時間を確保してゆっくりする','WAVE','MOON'],
+['誰かと意見が違ったときは？','相手の気持ちも大切にして話し合う','事実や約束を整理して落としどころを探す','ROSE','LEAF'],
+['新しいことを始めるときは？','まずやってみて、動きながら考える','状況を見ながら無理のない形にする','SUN','WAVE'],
+['気になるものを見つけたときは？','自分なりの視点で深掘りしてみる','慣れた方法や確かな情報を参考にする','STAR','LEAF']
 ];
 
-const dimensions = [
- {key:"action",name:"行動スタイル",a:"計画して動く傾向",b:"流れに合わせる傾向"},
- {key:"emotion",name:"気持ちの表し方",a:"気持ちを伝えて整理する傾向",b:"考える時間を大切にする傾向"},
- {key:"relationship",name:"人との関わり方",a:"言葉や行動で関わる傾向",b:"相手のペースを尊重する傾向"},
- {key:"distance",name:"人との距離感",a:"人と話して整理する傾向",b:"ひとりの時間を大切にする傾向"},
- {key:"love",name:"恋愛スタイル",a:"自分からきっかけを作る傾向",b:"安心できるペースを大切にする傾向"}
-];
-
-const profiles = {
- A:{
-  title:"自分から動く、前向きタイプ",
-  description:"気持ちや考えを行動につなげる力がありそう。自分からきっかけを作ることで、可能性を広げていくタイプかもしれません。",
-  strengthTitle:"一歩を踏み出す力",
-  strengthText:"必要なときに行動できるのが強み。周りにきっかけを与えたり、場の空気を動かしたりする存在になれるかもしれません。",
-  relationshipTitle:"気持ちを伝える力を大切に",
-  relationshipTip:"率直さは相手にとって安心材料になることも。相手の考えを聞く時間も作ると、お互いをもっと理解できそうです。",
-  loveTitle:"素直なアプローチが魅力",
-  loveTip:"好意や希望を言葉や行動で伝えるのは強み。相手のペースも尊重しながら、心地よい距離を探してみて。"
- },
- B:{
-  title:"自分のペースを大切にする、じっくりタイプ",
-  description:"周りの様子や自分の気持ちを確かめながら進む傾向がありそう。焦らず考えることで、自分に合う答えを見つけるタイプかもしれません。",
-  strengthTitle:"丁寧に見極める力",
-  strengthText:"状況や気持ちを考えられるのが強み。小さな変化に気づいたり、落ち着いた判断をしたりする力につながりそうです。",
-  relationshipTitle:"自分の気持ちも少しずつ伝えて",
-  relationshipTip:"相手を思いやって待てるのは素敵なこと。短いひと言でも、自分の希望を伝えてみて。",
-  loveTitle:"安心できる関係を育てる",
-  loveTip:"無理に積極的にならなくても大丈夫。安心できるペースを大切にしながら、感謝や好意を伝えてみて。"
- },
- mixed:{
-  title:"バランスを見つける、しなやかタイプ",
-  description:"場面や相手によって、行動的になったり慎重になったりする傾向がありそう。状況に合わせて方法を選べるタイプかもしれません。",
-  strengthTitle:"柔軟に切り替えられる力",
-  strengthText:"自分から動くことも、立ち止まって考えることもできるのが強み。状況に合わせて、ちょうどいい方法を選べる可能性があります。",
-  relationshipTitle:"相手に合わせすぎないことも大切",
-  relationshipTip:"柔軟さは魅力ですが、いつも周りを優先する必要はありません。自分はどうしたいのかも確かめてみて。",
-  loveTitle:"ふたりらしい距離感を探して",
-  loveTip:"積極的なときも、ひとりの時間がほしいときもあって大丈夫。自然体でいられる距離感を探してみて。"
- }
+const types={
+ROSE:{
+symbol:'✿',name:'ROSE',ja:'つながりを育てる人',
+color:'#bd8295',bg:'#f7e9ee',
+desc:'相手の気持ちを感じ取り、心の距離を縮めるのが得意。思いやりが自然に行動に表れます。',
+good:'共感力・あたたかさ',
+care:'相手を優先しすぎず、自分の気持ちも言葉にしてみて。'
+},
+MOON:{
+symbol:'☾',name:'MOON',ja:'自分のリズムを大切にする人',
+color:'#9a8ab9',bg:'#efebf7',
+desc:'自分の内側を見つめ、落ち着いて考えるタイプ。自分のペースを守ることで力を発揮します。',
+good:'内省・落ち着き',
+care:'考えがまとまる前でも、少しだけ共有すると伝わりやすいよ。'
+},
+SUN:{
+symbol:'☼',name:'SUN',ja:'動いて道をひらく人',
+color:'#c7a65c',bg:'#f8f1dc',
+desc:'まず一歩踏み出して、経験しながら前に進むタイプ。周りにも明るい勢いを届けます。',
+good:'行動力・前向きさ',
+care:'スピードが違う人には、少し待つ時間もプレゼントして。'
+},
+LEAF:{
+symbol:'❧',name:'LEAF',ja:'安心を積み重ねる人',
+color:'#819b83',bg:'#eaf1e9',
+desc:'約束や日々の積み重ねを大切にするタイプ。誠実さと安定感で周りを支えます。',
+good:'誠実さ・安定感',
+care:'いつも通りでない方法にも、試しに少し心を開いてみて。'
+},
+STAR:{
+symbol:'✦',name:'STAR',ja:'好奇心で世界を広げる人',
+color:'#7896b5',bg:'#e9f0f7',
+desc:'気づきや発見を楽しみ、自分ならではの視点を持つタイプ。新しい可能性を見つけるのが得意。',
+good:'好奇心・独自の視点',
+care:'アイデアを実際の一歩に落とし込むと、魅力がさらに伝わるよ。'
+},
+WAVE:{
+symbol:'〰',name:'WAVE',ja:'柔らかく調整する人',
+color:'#70a9a5',bg:'#e5f3f1',
+desc:'状況に合わせて柔軟に動き、バランスをとるタイプ。変化の中でも自分なりの流れを見つけます。',
+good:'柔軟性・調整力',
+care:'合わせるだけでなく、自分がどうしたいかも確かめてみて。'
+}
 };
 
-let mode = "solo";
-let pairKind = "love";
-let personNames = ["あなた","相手"];
-let currentPerson = 0;
-let currentIndex = 0;
-let answers = [[],[]];
+let mode='solo',relation='romance',person='A',answers=[],aAnswers=[],aType=null,bType=null,lastText='';
+const $=id=>document.getElementById(id);
 
-const $ = id => document.getElementById(id);
-
-function showScreen(id) {
- ["startScreen","pairSetup","quizScreen","betweenScreen","resultScreen"].forEach(screenId => {
-  $(screenId).classList.toggle("hidden",screenId !== id);
- });
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function startSolo() {
- mode = "solo";
- currentPerson = 0;
- currentIndex = 0;
- answers = [[],[]];
- $("shareStatus").textContent = "";
- showScreen("quizScreen");
- renderQuestion();
-}
-
-function startPair(kind) {
- mode = "pair";
- pairKind = kind;
- personNames = [
-  $("personA").value.trim() || "Aさん",
-  $("personB").value.trim() || "Bさん"
- ];
- currentPerson = 0;
- currentIndex = 0;
- answers = [[],[]];
- $("shareStatus").textContent = "";
- showScreen("quizScreen");
- renderQuestion();
-}
-
-function renderQuestion() {
- const q = questions[currentIndex];
- $("questionCount").textContent = `QUESTION ${currentIndex+1} / ${questions.length}`;
- $("progressPercent").textContent = `${Math.round((currentIndex+1)/questions.length*100)}%`;
- $("progressBar").style.width = `${(currentIndex+1)/questions.length*100}%`;
- $("categoryLabel").textContent = q.category;
- $("questionText").textContent = q.question;
- $("choiceAText").textContent = q.A;
- $("choiceBText").textContent = q.B;
- $("whoLabel").textContent = mode === "pair"
-  ? `${personNames[currentPerson]}の回答`
-  : "あなたの回答";
-}
-
-function chooseAnswer(answer) {
- answers[currentPerson][currentIndex] = answer;
- currentIndex++;
- if (currentIndex < questions.length) {
-  renderQuestion();
-  return;
- }
-
- if (mode === "solo") {
-  showSoloResults();
- } else if (currentPerson === 0) {
-  currentPerson = 1;
-  currentIndex = 0;
-  $("betweenTitle").textContent = `${personNames[0]}の回答完了！`;
-  $("betweenText").textContent = `次は${personNames[1]}の番です。`;
-  $("nextPersonBtn").textContent = `${personNames[1]}の診断を始める`;
-  showScreen("betweenScreen");
- } else {
-  showPairResults();
- }
-}
-
-function getPatterns(personAnswers) {
- const counts = {};
- dimensions.forEach(d => counts[d.key] = {A:0,B:0});
- questions.forEach((q,i) => {
-  counts[q.dimension][personAnswers[i]]++;
- });
- const patterns = {};
- dimensions.forEach(d => {
-  const c = counts[d.key];
-  patterns[d.key] = c.A === c.B ? "mixed" : (c.A > c.B ? "A" : "B");
- });
- return patterns;
-}
-
-function overallType(personAnswers) {
- const aCount = personAnswers.filter(a => a === "A").length;
- const patterns = getPatterns(personAnswers);
- const mixedCount = Object.values(patterns).filter(p => p === "mixed").length;
- return mixedCount >= 3 ? "mixed" : (aCount >= 5 ? "A" : "B");
-}
-
-function showSoloResults() {
- const profile = profiles[overallType(answers[0])];
- $("resultPill").textContent = "YOUR TONE";
- $("resultHeading").textContent = "あなたの診断結果";
- $("resultNames").textContent = "";
- $("scoreArea").classList.add("hidden");
- $("soloSections").classList.remove("hidden");
- $("pairSections").classList.add("hidden");
- $("resultTitle").textContent = profile.title;
- $("resultDescription").textContent = profile.description;
- $("strengthTitle").textContent = profile.strengthTitle;
- $("strengthText").textContent = profile.strengthText;
- $("relationshipTitle").textContent = profile.relationshipTitle;
- $("relationshipTip").textContent = profile.relationshipTip;
- $("loveTitle").textContent = profile.loveTitle;
- $("loveTip").textContent = profile.loveTip;
- showScreen("resultScreen");
-}
-
-function showPairResults() {
- const a = getPatterns(answers[0]);
- const b = getPatterns(answers[1]);
- let score = 60;
- let exact = 0;
- let near = 0;
- const same = [];
- const different = [];
-
- dimensions.forEach(d => {
-  const x = a[d.key], y = b[d.key];
-  if (x === y) {
-   score += 8;
-   exact++;
-   same.push(d.name);
-  } else if (x === "mixed" || y === "mixed") {
-   score += 4;
-   near++;
-   different.push({
-    name:d.name,
-    text:`${personNames[0]}は${patternText(x,d)}, ${personNames[1]}は${patternText(y,d)}の傾向。感じ方の違いを話してみると、新しい発見がありそうです。`
-   });
-  } else {
-   different.push({
-    name:d.name,
-    text:`${personNames[0]}は${patternText(x,d)}, ${personNames[1]}は${patternText(y,d)}の傾向。どちらが正しいということではなく、違う視点を持っているのかもしれません。`
-   });
-  }
- });
- score = Math.min(100,score);
-
- let title,description,message;
- if (score >= 88) {
-  title = "似ているところが多いふたり";
-  description = "大切にしていることや反応に共通点がありそう。自然に理解し合える部分を、ふたりの強みにしていこう。";
-  message = "共通点を楽しみながら、違うところも知っていこう。";
- } else if (score >= 76) {
-  title = "共通点と違いを楽しめるふたり";
-  description = "似ている部分に加えて、それぞれの個性もありそう。共感できるところを土台に、違いから新しい発見ができる関係かもしれません。";
-  message = "同じところも、違うところも、ふたりらしさ。";
- } else {
-  title = "違いから学び合えるふたり";
-  description = "物事の受け止め方や行動に違いが見られるかもしれません。違いは相性の悪さを意味するものではなく、お互いを知るきっかけになります。";
-  message = "相手のやり方を聞いてみることから始めよう。";
- }
-
- $("resultPill").textContent = pairKind === "love" ? "LOVE TONE" : "FRIEND TONE";
- $("resultHeading").textContent = "ふたりの相性レポート";
- $("resultNames").textContent = `${personNames[0]} ＆ ${personNames[1]}`;
- $("scoreArea").classList.remove("hidden");
- $("scoreValue").textContent = score;
- $("scoreMessage").textContent = message;
- $("resultTitle").textContent = title;
- $("resultDescription").textContent = description;
- $("soloSections").classList.add("hidden");
- $("pairSections").classList.remove("hidden");
-
- if (same.length) {
-  $("commonText").textContent = `ふたりの回答には「${same.join("」「")}」の傾向に共通点がありました。共通する感覚や考え方を、ふたりのコミュニケーションに活かしてみてね。`;
- } else {
-  $("commonText").textContent = "今回の回答では、同じ傾向がはっきり出た項目はありませんでした。でも、違う視点を持つふたりだからこそ、相手から学べることもありそうです。";
- }
-
- if (different.length) {
-  $("differences").innerHTML = "";
-  different.forEach(item => {
-   const row = document.createElement("div");
-   row.className = "match-row";
-   const icon = document.createElement("span");
-   icon.className = "match-icon";
-   icon.textContent = "✿";
-   const content = document.createElement("div");
-   const heading = document.createElement("strong");
-   heading.textContent = item.name;
-   const text = document.createElement("div");
-   text.textContent = item.text;
-   content.append(heading,text);
-   row.append(icon,content);
-   $("differences").appendChild(row);
-  });
- } else {
-  $("differences").textContent = "今回の5つの項目では、似た傾向が多く見られました。似ているからこそ、相手も同じように感じているとは限らないことを忘れずに。";
- }
-
- $("pairAdviceHeading").textContent = pairKind === "love"
-  ? "✧ 恋愛・パートナーへのヒント"
-  : "✧ 友達・家族へのヒント";
-
- const baseAdvice = pairKind === "love"
-  ? "恋愛では、相性スコアだけで関係が決まるわけではありません。気持ちを決めつけず、連絡のペースや一緒に過ごす時間の希望を言葉にして共有してみて。"
-  : "友情や家族関係では、相手を自分と同じ考え方に変えようとしないことが大切。違うところを知ったうえで、困ったときは率直に話し合ってみて。";
- $("pairAdvice").textContent = baseAdvice;
- showScreen("resultScreen");
-}
-
-function patternText(pattern,d) {
- if (pattern === "A") return d.a;
- if (pattern === "B") return d.b;
- return "場面に応じて使い分ける";
-}
-
-function getSiteUrl() {
- return window.location.href.split("#")[0].split("?")[0];
-}
-
-function getShareText() {
- const lines = [
-  "🌷 TONE診断 🌷",
-  $("resultHeading").textContent,
-  $("resultNames").textContent,
-  "",
-  $("resultTitle").textContent,
-  $("resultDescription").textContent
- ];
- if (mode === "pair") {
-  lines.push("",`相性スコア：${$("scoreValue").textContent} / 100`,"",$("commonText").textContent,"",$("pairAdvice").textContent);
- } else {
-  lines.push("","✨ 隠れた強み",$("strengthTitle").textContent,$("strengthText").textContent,
-   "","🌿 人間関係",$("relationshipTitle").textContent,$("relationshipTip").textContent,
-   "","💕 恋愛",$("loveTitle").textContent,$("loveTip").textContent);
- }
- lines.push("","あなたもTONEをやってみてね！",getSiteUrl());
- return lines.join("\n");
-}
-
-async function copyText(text,message) {
- try {
-  if (navigator.clipboard && window.isSecureContext) {
-   await navigator.clipboard.writeText(text);
-  } else {
-   const area = document.createElement("textarea");
-   area.value = text;
-   area.style.position = "fixed";
-   area.style.left = "-9999px";
-   document.body.appendChild(area);
-   area.focus();area.select();
-   const ok = document.execCommand("copy");
-   area.remove();
-   if (!ok) throw new Error("copy failed");
-  }
-  $("shareStatus").textContent = message;
- } catch (error) {
-  $("shareStatus").textContent = "自動コピーできない場合は、表示された文章をコピーしてね。";
-  window.prompt("コピーしたい文章です。選択してコピーしてください：",text);
- }
-}
-
-async function shareResult() {
- const text = getShareText();
- const url = getSiteUrl();
- $("shareStatus").textContent = "";
- if (navigator.share) {
-  try {
-   await navigator.share({title:"TONE診断の結果",text:text,url:url});
-  } catch (error) {
-   if (error.name !== "AbortError") await copyText(text,"結果とURLをコピーしました！");
-  }
- } else {
-  await copyText(text,"結果とURLをコピーしました！LINEなどに貼り付けてね。");
- }
-}
-
-$("soloStart").addEventListener("click",startSolo);
-$("pairStart").addEventListener("click",() => showScreen("pairSetup"));
-$("setupBack").addEventListener("click",() => showScreen("startScreen"));
-document.querySelectorAll("[data-kind]").forEach(button => {
- button.addEventListener("click",() => startPair(button.dataset.kind));
+function show(id){
+['home','quiz','pass','result'].forEach(x=>{
+$(x).classList.toggle('hidden',x!==id);
 });
-$("nextPersonBtn").addEventListener("click",() => {
- currentPerson = 1;
- currentIndex = 0;
- showScreen("quizScreen");
- renderQuestion();
+}
+
+$('start').onclick=()=>{
+mode=$('mode').value;
+relation=$('relation').value;
+person='A';
+answers=[];
+aAnswers=[];
+aType=null;
+bType=null;
+renderQ();
+show('quiz');
+};
+
+function renderQ(){
+let i=answers.length;
+$('qnum').textContent=`QUESTION ${String(i+1).padStart(2,'0')} / ${qs.length}`;
+$('bar').style.width=`${i/qs.length*100}%`;
+$('qtext').textContent=qs[i][0];
+$('choices').innerHTML='';
+
+[1,2].forEach(n=>{
+let b=document.createElement('button');
+b.className='choice';
+b.innerHTML=`<strong>${n===1?'①':'②'} ${qs[i][n]}</strong><span>今の自分に近いのはこっち</span>`;
+b.onclick=()=>{
+answers.push(n);
+if(answers.length<qs.length){
+renderQ();
+}else{
+finishPerson();
+}
+};
+$('choices').appendChild(b);
 });
-$("cancelPairBtn").addEventListener("click",() => showScreen("startScreen"));
-$("choiceA").addEventListener("click",() => chooseAnswer("A"));
-$("choiceB").addEventListener("click",() => chooseAnswer("B"));
-$("shareBtn").addEventListener("click",shareResult);
-$("copyResultBtn").addEventListener("click",() =>
- copyText(getShareText(),"結果とURLをコピーしました！LINEなどに貼り付けてね。")
-);
-$("copyUrlBtn").addEventListener("click",() =>
- copyText(getSiteUrl(),"TONEのURLをコピーしました！友達に送ってね。")
-);
-$("restartBtn").addEventListener("click",() => {
- if (mode === "pair") {
-  currentPerson = 0;
-  currentIndex = 0;
-  answers = [[],[]];
-  showScreen("pairSetup");
- } else {
-  startSolo();
- }
+}
+
+function getType(ans){
+let s={ROSE:0,MOON:0,SUN:0,LEAF:0,STAR:0,WAVE:0};
+ans.forEach((n,i)=>{
+s[qs[i][n===1?3:4]]++;
 });
-$("homeBtn").addEventListener("click",() => showScreen("startScreen"));
-</script>
-</body>
-</html>
+return Object.keys(s)
+.sort((a,b)=>s[b]-s[a]||Object.keys(s).indexOf(a)-Object.keys(s).indexOf(b))
+.slice(0,2);
+}
+
+function finishPerson(){
+if(person==='A'&&mode==='pair'){
+aAnswers=answers.slice();
+aType=getType(aAnswers);
+person='B';
+answers=[];
+show('pass');
+return;
+}
+if(mode==='pair'){
+bType=getType(answers);
+renderPair();
+}else{
+renderSolo(getType(answers));
+}
+show('result');
+}
+
+$('startB').onclick=()=>{
+answers=[];
+renderQ();
+show('quiz');
+};
+
+function typeCard(t,secondary=false){
+let x=types[t];
+return `<div class="type-head">
+<div class="symbol" style="background:${x.bg};color:${x.color}">${x.symbol}</div>
+<div>
+<div class="type-kicker">${secondary?'YOUR SUB TONE':'YOUR MAIN TONE'}</div>
+<div class="type-name" style="color:${x.color}">${x.name}</div>
+<b>${x.ja}</b>
+</div>
+</div>
+<p>${x.desc}</p>
+<span class="pill">${x.good}</span>
+${secondary?'':`<p class="desc">ちょっとしたヒント：${x.care}</p>`}`;
+}
+
+function renderSolo(rank){
+lastText=`TONE診断結果：${types[rank[0]].name} ${types[rank[0]].ja}／サブ ${types[rank[1]].name}`;
+$('resultBody').innerHTML=`
+<div class="eyebrow">あなたのメインタイプ</div>
+${typeCard(rank[0])}
+<hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+<div class="eyebrow">もうひとつのあなたらしさ</div>
+${typeCard(rank[1],true)}
+<p class="desc" style="margin-top:20px">タイプは固定された性格ではなく、そのときの傾向を知るためのヒントです。</p>`;
+}
+
+function renderPair(){
+let x=types[aType[0]],y=types[bType[0]];
+let shared=aType[0]===bType[0];
+let secondary=aType[1]===bType[0]||bType[1]===aType[0];
+
+let score=shared?92:secondary?82:
+({
+ROSE:['MOON','LEAF','WAVE'],
+MOON:['ROSE','STAR','WAVE'],
+SUN:['STAR','WAVE','LEAF'],
+LEAF:['ROSE','SUN','WAVE'],
+STAR:['SUN','MOON','WAVE'],
+WAVE:['ROSE','MOON','SUN','LEAF','STAR']
+})[aType[0]].includes(bType[0])?78:70;
+
+let rel=relation==='romance'?'ふたりの関係を育てるヒント':'お互いを活かすヒント';
+
+lastText=`TONE相性結果：A ${x.name} ${x.ja}／B ${y.name} ${y.ja}／相性スコア ${score}`;
+
+$('resultBody').innerHTML=`
+<div class="eyebrow">TWO TONES, ONE RELATIONSHIP</div>
+<h2 class="h2">違うところも、似ているところも。</h2>
+<div class="type-pair">
+<div class="mini">
+<div class="symbol" style="background:${x.bg};color:${x.color}">${x.symbol}</div>
+<b>Aさん · ${x.name}</b>
+<div class="small">${x.ja}</div>
+</div>
+<div class="mini">
+<div class="symbol" style="background:${y.bg};color:${y.color}">${y.symbol}</div>
+<b>Bさん · ${y.name}</b>
+<div class="small">${y.ja}</div>
+</div>
+</div>
+<div style="text-align:center;margin:
