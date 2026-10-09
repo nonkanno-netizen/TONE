@@ -4,6 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TONE | あなたらしさを知る2択診断</title>
+
+/* TONE トップのかわいいイラスト */
+.hero-art {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 22px auto 18px;
+  padding: 8px 0;
+}
+
+.art-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: Georgia, serif;
+  box-shadow: 0 5px 18px #a58ba012;
+  animation: tone-float 3s ease-in-out infinite;
+}
+
+.art-flower {
+  width: 66px;
+  height: 66px;
+  background: #f5dfe9;
+  color: #b77e94;
+  font-size: 39px;
+}
+
+.art-moon {
+  width: 55px;
+  height: 55px;
+  background: #eae3f6;
+  color: #9383b6;
+  font-size: 34px;
+  animation-delay: .4s;
+}
+
+.art-sun {
+  width: 72px;
+  height: 72px;
+  background: #faf0d4;
+  color: #b99a50;
+  font-size: 43px;
+  animation-delay: .8s;
+}
+
+.art-leaf {
+  width: 55px;
+  height: 55px;
+  background: #e5eee1;
+  color: #789579;
+  font-size: 34px;
+  animation-delay: 1.2s;
+}
+
+@keyframes tone-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (max-width: 380px) {
+  .hero-art { gap: 8px; }
+  .art-flower { width: 58px; height: 58px; }
+  .art-moon, .art-leaf { width: 49px; height: 49px; }
+  .art-sun { width: 63px; height: 63px; }
+}
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f8f3f5;color:#49434a;font-family:Arial,"Yu Gothic",Meiryo,sans-serif;line-height:1.8}
