@@ -2,179 +2,69 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TONE｜あなたらしさ発見テスト</title>
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Hiragino Sans","Meiryo",sans-serif;
-  background:linear-gradient(145deg,#fff5f0,#f5f0ff,#edf8f1);
-  color:#51485c;
-  min-height:100vh;
-  padding:24px 14px;
-}
-main{
-  max-width:600px;
-  margin:auto;
-  background:#ffffffed;
-  border-radius:26px;
-  padding:26px 20px;
-  box-shadow:0 8px 30px #82739b18;
-}
-.logo{text-align:center;font-size:13px;letter-spacing:5px;color:#a18bb9}
-h1{text-align:center;font-size:32px;margin:10px 0;color:#75618d}
-.sub{text-align:center;line-height:1.9;font-size:14px}
-.mascot{text-align:center;font-size:54px;margin:18px}
-button{
-  font:inherit;cursor:pointer;border:0;border-radius:16px;
-  padding:15px;width:100%;margin-top:12px;
-  background:#dcd0f3;color:#57466d;font-weight:bold;
-}
-button:hover{filter:brightness(.98)}
-.primary{background:#9982c2;color:white}
-.progress{height:7px;background:#eee8f5;border-radius:9px;margin:20px 0}
-.bar{height:7px;background:#b9a4dc;border-radius:9px;width:0}
-.question{font-size:19px;line-height:1.7;font-weight:bold;margin:24px 0}
-.answer{
-  display:block;text-align:left;background:#fff8f5;
-  border:2px solid #f1e5e2;color:#51485c;
-}
-.answer:hover{border-color:#c4addd;background:#faf5ff}
-.small{text-align:center;font-size:12px;color:#978da0;margin-top:18px}
-.result{text-align:center}
-.typeIcon{font-size:64px;margin:12px}
-.typeName{font-size:25px;color:#8069a2;font-weight:bold}
-.description{line-height:1.9;text-align:left;background:#faf6ff;padding:18px;border-radius:16px;margin:20px 0}
-.tag{display:inline-block;background:#f2eafa;padding:7px 12px;border-radius:20px;margin:4px;font-size:13px}
+body{font-family: sans-serif;background:linear-gradient(135deg,#fff5f0,#f5f0ff,#edf8f1);color:#51485c;padding:20px}
+main{max-width:500px;margin:20px auto;background:white;padding:24px;border-radius:24px}
+h1{text-align:center;color:#8069a2;font-size:25px}
+p{line-height:1.8}
+button{width:100%;padding:15px;margin:8px 0;border:0;border-radius:14px;background:#e8ddf7;color:#51485c;font-size:16px;cursor:pointer}
 .hidden{display:none}
 </style>
 </head>
 <body>
 <main>
-  <div class="logo">T O N E</div>
-  <h1>あなたらしさ発見テスト</h1>
-  <p class="sub">10個の質問から見つける、<br>あなたの考え方と行動のTONE 🌷</p>
-
-  <section id="start">
-    <div class="mascot">🌈</div>
-    <p class="sub">直感で選んでOK！<br>正解・不正解はありません。<br>今の自分に近い方を選んでね。</p>
-    <button class="primary" onclick="begin()">診断スタート ✨</button>
-    <p class="small">TONE MONITOR VERSION</p>
-  </section>
-
-  <section id="quiz" class="hidden">
-    <div id="count"></div>
-    <div class="progress"><div id="bar" class="bar"></div></div>
-    <div id="question" class="question"></div>
-    <button class="answer" id="a" onclick="answer(0)"></button>
-    <button class="answer" id="b" onclick="answer(1)"></button>
-    <p class="small">迷ったら、より自分らしい方を選んでね。</p>
-  </section>
-
-  <section id="result" class="hidden result">
-    <div class="typeIcon" id="icon"></div>
-    <p>あなたのTONEは…</p>
-    <div class="typeName" id="type"></div>
-    <div class="description" id="desc"></div>
-    <div id="tags"></div>
-    <p class="small">※モニター版の簡易診断です。性格を決めつけるものではありません。</p>
-    <button class="primary" onclick="shareResult()">結果をシェアする 💌</button>
-    <button onclick="restart()">もう一度診断する</button>
-  </section>
+<h1>T O N E 🌷<br>あなたらしさ発見テスト</h1>
+<p id="intro">10個の質問から、あなたの考え方や行動のTONEを見つけよう！正解はないよ。直感で選んでね。</p>
+<div id="quiz" class="hidden">
+<p id="count"></p><h3 id="question"></h3>
+<button id="a" onclick="answer(0)"></button>
+<button id="b" onclick="answer(1)"></button>
+</div>
+<div id="result" class="hidden"></div>
+<button id="start" onclick="begin()">診断スタート ✨</button>
 </main>
-
 <script>
-const questions = [
- {q:"予定が急にキャンセルになったら？",a:"残念！楽しみにしていたのに",b:"自由時間ができた！"},
- {q:"人から褒められたら？",a:"素直にうれしい！",b:"本当かな？と少し考える"},
- {q:"誰かに嫌なことをされたら？",a:"まず感情が動く",b:"どうしてそうしたのか考える"},
- {q:"やることがたくさんあるときは？",a:"まずできることから始める",b:"順番や段取りを考えてから始める"},
- {q:"友達から急に遊びに誘われたら？",a:"楽しそう！とすぐ乗り気になる",b:"予定や気分を少し考える"},
- {q:"出発時間なのに準備が終わっていない！",a:"多少足りなくても出発する",b:"できるだけ準備を終えてから出る"},
- {q:"LINEの返信がなかなか来ないときは？",a:"忙しいのかな、とあまり気にしない",b:"何かあったのかな、と気になる"},
- {q:"誰かにお願いをされたら？",a:"つい引き受けてしまう",b:"自分の都合も考えて決める"},
- {q:"好きな人から急に『会いたい』と言われたら？",a:"うれしい！会いたい！",b:"どうしたんだろう？と少し考える"},
- {q:"自分に近いのはどっち？",a:"考えるより、まず動いてみる",b:"動く前に、いろいろ考える"}
+const qs=[
+["予定が急にキャンセルになったら？","残念！楽しみにしていた","自由時間ができた！"],
+["人から褒められたら？","素直にうれしい","本当かな？と考える"],
+["嫌なことをされたら？","まず感情が動く","理由を考える"],
+["やることが多いときは？","まず始めてみる","順番を考えてから"],
+["急に遊びに誘われたら？","楽しそう！行きたい","予定や気分を考える"],
+["準備が終わっていない！","多少足りなくても出発","できるだけ準備する"],
+["LINEの返信が遅いときは？","忙しいのかな","何かあったのかな"],
+["お願いをされたら？","つい引き受ける","自分の都合も考える"],
+["好きな人に会いたいと言われたら？","うれしい！会いたい","どうしたんだろう？"],
+["自分に近いのは？","まず行動する","まず考える"]
 ];
-
-let current=0, answers=[];
-
+let n=0,score=0;
 function begin(){
- current=0;
- answers=[];
- document.getElementById("start").classList.add("hidden");
- document.getElementById("result").classList.add("hidden");
- document.getElementById("quiz").classList.remove("hidden");
- showQuestion();
+n=0;score=0;
+document.getElementById("intro").classList.add("hidden");
+document.getElementById("start").classList.add("hidden");
+document.getElementById("result").classList.add("hidden");
+document.getElementById("quiz").classList.remove("hidden");
+show();
 }
-
-function showQuestion(){
- const q=questions[current];
- document.getElementById("count").textContent="QUESTION "+(current+1)+" / "+questions.length;
- document.getElementById("bar").style.width=(current/questions.length*100)+"%";
- document.getElementById("question").textContent=q.q;
- document.getElementById("a").textContent="A　"+q.a;
- document.getElementById("b").textContent="B　"+q.b;
+function show(){
+document.getElementById("count").textContent="質問 "+(n+1)+" / 10";
+document.getElementById("question").textContent=qs[n][0];
+document.getElementById("a").textContent="A："+qs[n][1];
+document.getElementById("b").textContent="B："+qs[n][2];
 }
-
-function answer(n){
- answers.push(n);
- current++;
- if(current<questions.length){
-  showQuestion();
- }else{
-  showResult();
- }
-}
-
-function showResult(){
- document.getElementById("quiz").classList.add("hidden");
- document.getElementById("result").classList.remove("hidden");
-
- const a=answers.filter(x=>x===0).length;
- let icon,type,desc,tags;
-
- if(a>=7){
-  icon="⚡";
-  type="直感アクションTONE";
-  desc="あなたは、気持ちやひらめきを大切にして動けるタイプ。チャンスをつかむ行動力や、素直なリアクションが魅力です。考えすぎずに一歩を踏み出せる反面、勢いで決めてしまうことも。ときどき立ち止まると、さらに自分らしさが輝きそう！";
-  tags=["行動力","素直さ","ひらめき"];
- }else if(a<=3){
-  icon="🧠";
-  type="じっくり思考TONE";
-  desc="あなたは、状況や相手の気持ちを考えながら判断するタイプ。慎重さや、物事を深く考えられるところが魅力です。先を見通して行動できる一方、考えすぎて疲れることも。完璧な答えが出る前に動いてみるのもおすすめです。";
-  tags=["慎重さ","分析力","計画性"];
- }else{
-  icon="🌿";
-  type="バランスTONE";
-  desc="あなたは、直感と慎重さを状況に合わせて使い分けるタイプ。柔軟に考えられるところが魅力です。相手や場面に合わせて行動できる一方、自分の本音が後回しになることも。ときには自分がどうしたいかを一番に考えてみてね。";
-  tags=["柔軟性","バランス感覚","適応力"];
- }
-
- document.getElementById("icon").textContent=icon;
- document.getElementById("type").textContent=type;
- document.getElementById("desc").textContent=desc;
- document.getElementById("tags").innerHTML=tags.map(t=>'<span class="tag">'+t+'</span>').join("");
- document.getElementById("bar").style.width="100%";
-}
-
-function restart(){
- document.getElementById("result").classList.add("hidden");
- document.getElementById("start").classList.remove("hidden");
-}
-
-function shareResult(){
- const text="私のTONE診断結果は「"+document.getElementById("type").textContent+"」！\nあなたらしさ発見テスト 🌷";
- if(navigator.share){
-  navigator.share({title:"TONE診断",text:text}).catch(()=>{});
- }else if(navigator.clipboard){
-  navigator.clipboard.writeText(text)
-   .then(()=>alert("結果をコピーしたよ！LINEなどに貼り付けてね。"))
-   .catch(()=>prompt("この結果をコピーしてね",text));
- }else{
-  prompt("この結果をコピーしてね",text);
- }
+function answer(v){
+score+=v===0?1:0;n++;
+if(n<qs.length){show();return;}
+document.getElementById("quiz").classList.add("hidden");
+let title,desc;
+if(score>=7){title="⚡ 直感アクションTONE";desc="ひらめきや気持ちを大切にして行動できるタイプ。行動力と素直さが魅力！";}
+else if(score<=3){title="🧠 じっくり思考TONE";desc="状況や相手の気持ちを考えて判断するタイプ。慎重さと分析力が魅力！";}
+else{title="🌿 バランスTONE";desc="直感と慎重さを使い分けられるタイプ。柔軟性と適応力が魅力！";}
+document.getElementById("result").innerHTML="<h2>"+title+"</h2><p>"+desc+"</p><p>※モニター版の簡易診断です。</p><button onclick='begin()'>もう一度診断する</button>";
+document.getElementById("result").classList.remove("hidden");
+document.getElementById("start").classList.remove("hidden");
+document.getElementById("start").textContent="最初に戻る";
 }
 </script>
 </body>
