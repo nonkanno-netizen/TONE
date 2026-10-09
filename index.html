@@ -1,306 +1,510 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TONE | あなたらしさを知る2択診断</title>
-
-/* TONE トップのかわいいイラスト */
-.hero-art {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 22px auto 18px;
-  padding: 8px 0;
-}
-
-.art-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-family: Georgia, serif;
-  box-shadow: 0 5px 18px #a58ba012;
-  animation: tone-float 3s ease-in-out infinite;
-}
-
-.art-flower {
-  width: 66px;
-  height: 66px;
-  background: #f5dfe9;
-  color: #b77e94;
-  font-size: 39px;
-}
-
-.art-moon {
-  width: 55px;
-  height: 55px;
-  background: #eae3f6;
-  color: #9383b6;
-  font-size: 34px;
-  animation-delay: .4s;
-}
-
-.art-sun {
-  width: 72px;
-  height: 72px;
-  background: #faf0d4;
-  color: #b99a50;
-  font-size: 43px;
-  animation-delay: .8s;
-}
-
-.art-leaf {
-  width: 55px;
-  height: 55px;
-  background: #e5eee1;
-  color: #789579;
-  font-size: 34px;
-  animation-delay: 1.2s;
-}
-
-@keyframes tone-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@media (max-width: 380px) {
-  .hero-art { gap: 8px; }
-  .art-flower { width: 58px; height: 58px; }
-  .art-moon, .art-leaf { width: 49px; height: 49px; }
-  .art-sun { width: 63px; height: 63px; }
-}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TONE｜自分らしさ発見診断</title>
+<meta name="description" content="10問の2択で、自分らしさや人間関係、恋愛の傾向を発見するTONE診断。">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f8f3f5;color:#49434a;font-family:Arial,"Yu Gothic",Meiryo,sans-serif;line-height:1.8}
-main{max-width:680px;margin:auto;padding:22px 16px 50px}
-header{text-align:center;padding:20px 0}
-.logo{font-family:Georgia,serif;font-size:52px;letter-spacing:9px;color:#a47e91;margin:0}
-.subtitle{font-size:13px;color:#887b87}
-.card{background:white;border-radius:22px;padding:23px;margin:14px 0;box-shadow:0 5px 25px #78607812}
-h2{font-size:23px;line-height:1.5;margin:8px 0 15px}
-p{margin:10px 0}
-.muted{color:#807781;font-size:14px}
-.label{font-size:12px;letter-spacing:2px;color:#a47e91;font-weight:bold}
-button,select{font:inherit}
-button{cursor:pointer;border:0;border-radius:14px;padding:14px}
-.primary{width:100%;background:#a47e91;color:white;font-weight:bold;margin-top:15px}
-.choice{width:100%;background:#fffafa;border:1px solid #eadfe6;text-align:left;margin:6px 0;color:#49434a}
-.choice:hover{background:#f8edf3;border-color:#c7a2b6}
-select{width:100%;padding:12px;border:1px solid #e7dce3;border-radius:12px;background:white;margin:5px 0 16px}
-.progress{height:6px;background:#eee7ed;border-radius:8px;margin:15px 0 24px;overflow:hidden}
-#bar{height:100%;width:0;background:#bc91a8}
-.hidden{display:none!important}
-.typebox{border-radius:18px;padding:18px;margin:15px 0;background:#faf5f8}
-.symbol{font-size:46px;line-height:1.2}
-.typeName{font-family:Georgia,serif;font-size:28px;letter-spacing:2px}
-.score{font-size:40px;color:#a47e91;font-weight:bold;text-align:center}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.actions button{flex:1;background:#f2eaf0;color:#6f586a}
-footer{text-align:center;font-size:11px;color:#a99ba6;padding:20px}
+:root {
+  --ink: #494253;
+  --muted: #81798a;
+  --purple: #8066b3;
+  --purple-light: #f0eafa;
+  --pink: #f8e8ee;
+  --green: #e7f3ec;
+  --cream: #fffaf5;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 22px 14px 40px;
+  background: linear-gradient(150deg, #f7effa, #fff9f3 55%, #eef6f3);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  line-height: 1.8;
+}
+button { font: inherit; cursor: pointer; }
+.container { max-width: 650px; margin: 0 auto; }
+header { text-align: center; padding: 10px 0 20px; }
+.logo {
+  font-size: 38px; font-weight: 800; letter-spacing: 7px;
+  color: var(--purple); line-height: 1.3;
+}
+.tagline { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+.card {
+  background: rgba(255,255,255,.94);
+  border: 1px solid rgba(128,102,179,.13);
+  border-radius: 24px;
+  padding: 25px 22px;
+  box-shadow: 0 10px 32px rgba(83,65,107,.07);
+}
+h1 { font-size: 25px; line-height: 1.5; margin: 0 0 12px; }
+h2 { font-size: 21px; margin: 0 0 10px; }
+h3 { font-size: 17px; margin: 0 0 7px; }
+p { margin: 8px 0 14px; }
+.center { text-align: center; }
+.muted { color: var(--muted); font-size: 13px; }
+.pill {
+  display: inline-block; border-radius: 30px; padding: 4px 12px;
+  background: var(--purple-light); color: var(--purple);
+  font-size: 12px; margin-bottom: 12px;
+}
+.primary, .secondary, .choice {
+  width: 100%; border-radius: 15px; padding: 14px 16px;
+  transition: transform .15s, background .15s;
+}
+.primary {
+  border: 0; background: var(--purple); color: white;
+  font-weight: 700; margin-top: 14px;
+}
+.primary:hover { background: #6f559f; }
+.secondary {
+  border: 1px solid #ded4ed; background: white; color: var(--purple);
+  font-weight: 600; margin-top: 10px;
+}
+.choice {
+  text-align: left; border: 1px solid #e5dced; background: white;
+  color: var(--ink); margin-top: 12px; display: flex;
+  gap: 12px; align-items: flex-start;
+}
+.choice:hover { background: #f7f2fc; border-color: #b6a2d6; }
+.choice .letter {
+  flex: 0 0 32px; height: 32px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--purple-light);
+  color: var(--purple); font-weight: 700;
+}
+.choice .choice-text { flex: 1; }
+.progress-wrap { margin: 0 0 22px; }
+.progress-label {
+  display: flex; justify-content: space-between; gap: 10px;
+  font-size: 12px; color: var(--muted); margin-bottom: 7px;
+}
+.progress { height: 7px; border-radius: 10px; background: #eee8f3; overflow: hidden; }
+.progress-bar { height: 100%; background: var(--purple); width: 0; transition: width .2s; }
+.question { font-size: 22px; line-height: 1.6; margin-bottom: 18px; }
+.result-hero {
+  background: linear-gradient(135deg, #f0eafa, #fbeaf0);
+  padding: 23px 18px; border-radius: 20px; text-align: center;
+  margin-bottom: 18px;
+}
+.result-hero h2 { font-size: 25px; color: #6e5598; }
+.result-hero p { margin-bottom: 0; }
+.result-section {
+  padding: 17px; border-radius: 17px; margin-top: 13px;
+}
+.result-section p { margin: 5px 0 0; }
+.strength { background: var(--purple-light); }
+.relationship { background: var(--green); }
+.love { background: var(--pink); }
+.share-panel {
+  border: 1px dashed #cdbde2; border-radius: 18px;
+  padding: 17px; margin-top: 20px; background: #fdfbff;
+}
+.share-panel .primary { margin-top: 7px; }
+.share-panel .secondary { margin-top: 8px; }
+.footer { text-align: center; color: var(--muted); font-size: 12px; padding: 22px 0 0; }
+.hidden { display: none !important; }
+.small-note { font-size: 12px; color: var(--muted); }
+@media (max-width: 420px) {
+  body { padding: 14px 10px 30px; }
+  .card { padding: 21px 16px; }
+  .question { font-size: 20px; }
+  h1 { font-size: 23px; }
+}
 </style>
 </head>
 <body>
-<main>
-<header>
-<p class="label">FIND YOUR TONE</p>
-<h1 class="logo">TONE</h1>
-<p class="subtitle">ちがいを知ると、自分にも相手にもやさしくなれる。</p>
-</header>
+<div class="container">
+  <header>
+    <div class="logo">TONE</div>
+    <div class="tagline">自分らしさを見つける、10の質問。</div>
+  </header>
 
-<section id="home" class="card">
-<p class="label">SELF DISCOVERY</p>
-<h2>あなたらしさを見つけよう。</h2>
-<p class="muted">10問の2択に答えるだけ。正解はないので、直感で選んでね。</p>
-<label for="mode">診断の種類</label>
-<select id="mode">
-<option value="solo">ひとりで性格診断</option>
-<option value="pair">ふたりで相性診断</option>
-</select>
-<label for="relation">ふたりの関係</label>
-<select id="relation">
-<option value="love">恋愛・パートナー</option>
-<option value="friend">友達・家族</option>
-</select>
-<button class="primary" id="start">診断スタート →</button>
-</section>
+  <main class="card">
+    <section id="startScreen" class="center">
+      <span class="pill">TONE PERSONALITY CHECK</span>
+      <h1>あなたらしさ、<br>見つけてみませんか？</h1>
+      <p>10問の2択に答えるだけ。</p>
+      <p>行動の傾向、人との距離感、隠れた強み、恋愛のヒントを見つけてみよう。</p>
+      <p class="muted">正解・不正解はありません。<br>今の自分に近い方を選んでね。</p>
+      <button class="primary" id="startBtn">診断をスタートする</button>
+    </section>
 
-<section id="quiz" class="card hidden">
-<p class="label" id="counter">QUESTION 1 / 10</p>
-<div class="progress"><div id="bar"></div></div>
-<h2 id="question"></h2>
-<div id="answers"></div>
-<p class="muted">深く考えすぎず、今の自分に近い方を選んでね。</p>
-</section>
+    <section id="quizScreen" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="questionCount">QUESTION 1 / 10</span>
+          <span id="progressPercent">10%</span>
+        </div>
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+      <span class="pill" id="categoryLabel">行動スタイル</span>
+      <h2 class="question" id="questionText"></h2>
+      <button class="choice" id="choiceA">
+        <span class="letter">A</span><span class="choice-text" id="choiceAText"></span>
+      </button>
+      <button class="choice" id="choiceB">
+        <span class="letter">B</span><span class="choice-text" id="choiceBText"></span>
+      </button>
+      <p class="small-note center">深く考えすぎず、直感で選んでみてね。</p>
+    </section>
 
-<section id="pass" class="card hidden">
-<p class="label">NEXT PLAYER</p>
-<h2>Bさんの番だよ！</h2>
-<p>端末をBさんに渡して、本人の感覚で答えてもらってね。</p>
-<button class="primary" id="startB">Bさんの診断を始める →</button>
-</section>
+    <section id="resultScreen" class="hidden">
+      <div class="center">
+        <span class="pill">YOUR TONE</span>
+        <h1>診断結果</h1>
+        <p class="muted">10問の回答から見えてきた、あなたの傾向です。</p>
+      </div>
 
-<section id="result" class="card hidden">
-<p class="label">YOUR TONE</p>
-<div id="resultContent"></div>
-<div class="actions">
-<button id="copy">結果をコピー</button>
-<button id="again">もう一度診断</button>
+      <div class="result-hero">
+        <p class="muted">あなたのTONE</p>
+        <h2 id="resultTitle"></h2>
+        <p id="resultDescription"></p>
+      </div>
+
+      <div class="result-section strength">
+        <h3>✨ あなたの隠れた強み</h3>
+        <h3 id="strengthTitle"></h3>
+        <p id="strengthText"></p>
+      </div>
+
+      <div class="result-section relationship">
+        <h3>🌿 人間関係のアドバイス</h3>
+        <h3 id="relationshipTitle"></h3>
+        <p id="relationshipTip"></p>
+      </div>
+
+      <div class="result-section love">
+        <h3>💕 恋愛アドバイス</h3>
+        <h3 id="loveTitle"></h3>
+        <p id="loveTip"></p>
+      </div>
+
+      <div class="share-panel">
+        <h3 class="center">あなたのTONEをシェアしよう！</h3>
+        <p class="muted center">結果を友達に送ったり、TONEを紹介したりできます。</p>
+        <button class="primary" id="shareBtn">📤 結果をシェアする</button>
+        <button class="secondary" id="copyResultBtn">📋 結果とURLをコピー</button>
+        <button class="secondary" id="copyUrlBtn">🔗 TONEのURLをコピー</button>
+        <p id="shareStatus" class="small-note center" role="status" aria-live="polite"></p>
+      </div>
+
+      <button class="secondary" id="restartBtn">もう一度診断する</button>
+      <button class="secondary" id="homeBtn">最初の画面に戻る</button>
+      <p class="small-note center">この診断は自己理解を楽しむためのものです。性格を決めつけるものではありません。</p>
+    </section>
+  </main>
+
+  <div class="footer">TONE · Find your own tone.</div>
 </div>
-<p id="notice" class="muted"></p>
-</section>
-<footer>TONE · Understand yourself, understand each other.</footer>
-</main>
 
 <script>
-(function(){
-"use strict";
-
-const questions=[
-["予定より早く準備が終わった。出発まで30分ある。","忘れ物がないかもう一度確認する","お茶でも飲んでゆっくり待つ","LEAF","MOON"],
-["友達から急に「今から会える？」と連絡が来た。","行けるならすぐ準備する","予定や気分を確認して決める","SUN","MOON"],
-["誰かに褒められたときは？","素直にうれしさを伝える","照れながら、どこがよかったか考える","ROSE","STAR"],
-["苦手なことを頼まれたら？","できる範囲を整理して対応する","やり方を工夫して取り組む","LEAF","WAVE"],
-["予定が急に変更になったら？","新しい予定も楽しめるよう切り替える","まず気持ちや段取りを整える","SUN","MOON"],
-["友達が落ち込んでいるときは？","気持ちに寄り添って話を聞く","別の視点やアイデアを一緒に探す","ROSE","STAR"],
-["休日の理想に近いのは？","気分に合わせて自由に過ごす","ひとり時間を大切にして過ごす","WAVE","MOON"],
-["誰かと意見が違ったときは？","相手の気持ちも考えて話し合う","事実や約束を整理して考える","ROSE","LEAF"],
-["新しいことを始めるときは？","まずやってみる","様子を見ながら進める","SUN","WAVE"],
-["気になるものを見つけたときは？","自分なりに深く調べてみる","確かな情報や経験を参考にする","STAR","LEAF"]
+const questions = [
+  {
+    category: "行動スタイル",
+    question: "出かける準備が予定より早く終わった。出発まで30分ある。",
+    A: "忘れ物がないか、もう一度確認する",
+    B: "お茶でも飲みながらゆっくり待つ",
+    dimension: "action"
+  },
+  {
+    category: "気持ちの表し方",
+    question: "誰かに「すごいね！」と褒められたら？",
+    A: "素直にうれしい！と伝える",
+    B: "照れて、つい控えめな反応になる",
+    dimension: "emotion"
+  },
+  {
+    category: "人との関わり方",
+    question: "仲のいい人に、ちょっと嫌なことをされたら？",
+    A: "できるだけ早めに自分の気持ちを伝える",
+    B: "まずは様子を見て、自分の中で整理する",
+    dimension: "relationship"
+  },
+  {
+    category: "行動スタイル",
+    question: "やることがいくつか重なっているときは？",
+    A: "順番や優先順位を決めて進める",
+    B: "そのときの気分や流れに合わせて進める",
+    dimension: "action"
+  },
+  {
+    category: "人との距離感",
+    question: "友達から「今から会わない？」と急に誘われたら？",
+    A: "予定が合えば、気軽に出かける",
+    B: "急な予定変更は苦手。前もって決めたい",
+    dimension: "distance"
+  },
+  {
+    category: "人との距離感",
+    question: "悩みごとがあるとき、あなたは？",
+    A: "誰かに話して、気持ちを整理したい",
+    B: "まずは自分ひとりで考える時間がほしい",
+    dimension: "distance"
+  },
+  {
+    category: "気持ちの表し方",
+    question: "大切な人と意見が食い違ったら？",
+    A: "話し合って、お互いの考えを知りたい",
+    B: "少し時間を置いて、落ち着いてから考えたい",
+    dimension: "emotion"
+  },
+  {
+    category: "人との関わり方",
+    question: "友達が元気のない様子。あなたなら？",
+    A: "声をかけて、話を聞こうとする",
+    B: "無理に聞かず、相手のタイミングを待つ",
+    dimension: "relationship"
+  },
+  {
+    category: "恋愛スタイル",
+    question: "気になる人から連絡がなかなか来ないときは？",
+    A: "自分から連絡してみる",
+    B: "相手の都合もあると思い、少し待つ",
+    dimension: "love"
+  },
+  {
+    category: "恋愛スタイル",
+    question: "好きな人との理想の過ごし方は？",
+    A: "一緒にいろいろな体験を楽しみたい",
+    B: "気を使わず、自然体でゆっくり過ごしたい",
+    dimension: "love"
+  }
 ];
 
-const types={
-ROSE:{symbol:"✿",ja:"つながりを育てる人",color:"#b77e94",bg:"#f8e9ef",good:"共感力・あたたかさ",desc:"相手の気持ちを大切にし、心の距離を縮めるのが得意。思いやりが自然に行動に表れます。",tip:"相手を優先しすぎず、自分の気持ちも言葉にしてみて。"},
-MOON:{symbol:"☾",ja:"自分のリズムを大切にする人",color:"#9383b6",bg:"#efebf8",good:"内省・落ち着き",desc:"自分の内側を見つめ、じっくり考えるタイプ。自分のペースを守ることで力を発揮します。",tip:"考えがまとまる前でも、少し共有すると伝わりやすいよ。"},
-SUN:{symbol:"☼",ja:"動いて道をひらく人",color:"#b99a50",bg:"#faf3dd",good:"行動力・前向きさ",desc:"まず一歩踏み出し、経験しながら前に進むタイプ。周りにも明るい勢いを届けます。",tip:"自分とスピードが違う人を待つことも大切に。"},
-LEAF:{symbol:"❧",ja:"安心を積み重ねる人",color:"#789579",bg:"#eaf2e9",good:"誠実さ・安定感",desc:"約束や日々の積み重ねを大切にするタイプ。誠実さと安定感で周りを支えます。",tip:"いつもと違う方法も、試しに少し取り入れてみて。"},
-STAR:{symbol:"✦",ja:"好奇心で世界を広げる人",color:"#7291b2",bg:"#eaf1f8",good:"好奇心・独自の視点",desc:"発見を楽しみ、自分ならではの視点を持つタイプ。新しい可能性を見つけるのが得意です。",tip:"アイデアを小さな一歩にすると、魅力がさらに伝わるよ。"},
-WAVE:{symbol:"〰",ja:"柔らかく調整する人",color:"#65a29c",bg:"#e7f4f1",good:"柔軟性・調整力",desc:"状況に合わせて柔軟に動き、バランスをとるタイプ。変化の中でも自分の流れを見つけます。",tip:"周りに合わせるだけでなく、自分の希望も確かめてみて。"}
+const dimensions = [
+  { key: "action", name: "行動スタイル" },
+  { key: "emotion", name: "気持ちの表し方" },
+  { key: "relationship", name: "人との関わり方" },
+  { key: "distance", name: "人との距離感" },
+  { key: "love", name: "恋愛スタイル" }
+];
+
+const resultProfiles = {
+  A: {
+    title: "自分から動く、前向きタイプ",
+    description: "気持ちや考えを行動につなげる力がありそう。自分からきっかけを作ることで、可能性を広げていくタイプかもしれません。",
+    strengthTitle: "一歩を踏み出す力",
+    strengthText: "迷っていても、必要なときに行動できるのがあなたの強み。周りにきっかけを与えたり、場の空気を動かしたりする存在になれるかもしれません。",
+    relationshipTitle: "気持ちを伝える力を大切に",
+    relationshipTip: "あなたの率直さは、相手にとって安心材料になることも。相手の考えを聞く時間も作ると、お互いをもっと理解できそうです。",
+    loveTitle: "素直なアプローチが魅力",
+    loveTip: "好意や希望を言葉や行動で伝えるのは大きな強み。相手のペースも尊重しながら、ふたりにとって心地よい距離を探してみて。"
+  },
+  B: {
+    title: "自分のペースを大切にする、じっくりタイプ",
+    description: "周りの様子や自分の気持ちを確かめながら進む傾向がありそう。焦らず考えることで、自分に合う答えを見つけられるタイプかもしれません。",
+    strengthTitle: "丁寧に見極める力",
+    strengthText: "すぐに結論を出さず、状況や気持ちを考えられるのがあなたの強み。小さな変化に気づいたり、落ち着いた判断をしたりする力につながりそうです。",
+    relationshipTitle: "自分の気持ちも少しずつ伝えて",
+    relationshipTip: "相手を思いやって待てるのは素敵なこと。けれど、我慢しすぎなくても大丈夫。短いひと言でも、自分の希望を伝えてみて。",
+    loveTitle: "安心できる関係を育てる",
+    loveTip: "無理に積極的にならなくても大丈夫。自分が安心できるペースを大切にしながら、小さな好意や感謝を伝えると、関係が進みやすくなるかもしれません。"
+  },
+  mixed: {
+    title: "バランスを見つける、しなやかタイプ",
+    description: "場面や相手によって、行動的になったり慎重になったりする傾向がありそう。ひとつの型にとらわれず、状況に合わせられるタイプかもしれません。",
+    strengthTitle: "柔軟に切り替えられる力",
+    strengthText: "自分から動くことも、立ち止まって考えることもできるのが強み。相手や状況に合わせて、ちょうどいい方法を選べる可能性があります。",
+    relationshipTitle: "相手に合わせすぎないことも大切",
+    relationshipTip: "柔軟さは魅力ですが、いつも周りを優先する必要はありません。自分はどうしたいのかも確かめながら関わると、より自然な関係を築けそうです。",
+    loveTitle: "ふたりらしい距離感を探して",
+    loveTip: "積極的になる日があっても、ひとりの時間がほしい日があっても大丈夫。無理に恋愛の型にはまらず、気持ちを少しずつ共有してみて。"
+  }
 };
 
-const $=id=>document.getElementById(id);
-let mode="solo",relation="love",player="A",answers=[],aType=[],bType=[],shareText="";
+let currentIndex = 0;
+let answers = [];
 
-function show(id){
-["home","quiz","pass","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));
-window.scrollTo(0,0);
-}
+const $ = id => document.getElementById(id);
 
-function rankTypes(ans){
-const scores={ROSE:0,MOON:0,SUN:0,LEAF:0,STAR:0,WAVE:0};
-ans.forEach((choice,i)=>{
-const type=questions[i][choice===0?3:4];
-scores[type]++;
-});
-return Object.keys(scores).sort((a,b)=>scores[b]-scores[a]||Object.keys(types).indexOf(a)-Object.keys(types).indexOf(b));
+function showScreen(screenId) {
+  ["startScreen", "quizScreen", "resultScreen"].forEach(id => {
+    $(id).classList.toggle("hidden", id !== screenId);
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function renderQuestion(){
-const i=answers.length;
-$("counter").textContent="QUESTION "+(i+1)+" / "+questions.length;
-$("bar").style.width=(i/questions.length*100)+"%";
-$("question").textContent=questions[i][0];
-$("answers").innerHTML="";
-[0,1].forEach(n=>{
-const btn=document.createElement("button");
-btn.className="choice";
-btn.textContent=(n===0?"① ":"② ")+questions[i][n+1];
-btn.addEventListener("click",()=>{
-answers.push(n);
-if(answers.length<questions.length){renderQuestion();}
-else{finishPlayer();}
-});
-$("answers").appendChild(btn);
-});
+function startQuiz() {
+  currentIndex = 0;
+  answers = [];
+  showScreen("quizScreen");
+  renderQuestion();
 }
 
-function finishPlayer(){
-if(mode==="pair"&&player==="A"){
-aType=rankTypes(answers);
-player="B";
-answers=[];
-show("pass");
-return;
-}
-if(mode==="pair"){
-bType=rankTypes(answers);
-renderPair();
-}else{
-renderSolo(rankTypes(answers));
-}
-show("result");
+function renderQuestion() {
+  const q = questions[currentIndex];
+  $("questionCount").textContent = `QUESTION ${currentIndex + 1} / ${questions.length}`;
+  $("progressPercent").textContent = `${Math.round((currentIndex + 1) / questions.length * 100)}%`;
+  $("progressBar").style.width = `${(currentIndex + 1) / questions.length * 100}%`;
+  $("categoryLabel").textContent = q.category;
+  $("questionText").textContent = q.question;
+  $("choiceAText").textContent = q.A;
+  $("choiceBText").textContent = q.B;
 }
 
-function typeHTML(id,sub){
-const t=types[id];
-return '<div class="typebox" style="background:'+t.bg+';color:#49434a">'+
-'<div class="symbol" style="color:'+t.color+'">'+t.symbol+'</div>'+
-'<div class="typeName" style="color:'+t.color+'">'+t.name+'</div>'+
-'<h2>'+t.ja+'</h2><p>'+t.desc+'</p>'+
-'<p><strong>あなたの強み：</strong>'+t.good+'</p>'+
-(sub?"":'<p><strong>ヒント：</strong>'+t.tip+'</p>')+
-'</div>';
+function chooseAnswer(answer) {
+  answers[currentIndex] = answer;
+  currentIndex++;
+  if (currentIndex < questions.length) {
+    renderQuestion();
+  } else {
+    showResults();
+  }
 }
 
-function renderSolo(rank){
-shareText="TONE診断結果："+rank[0]+"（"+types[rank[0]].ja+"）／サブ："+rank[1]+"（"+types[rank[1]].ja+"）";
-$("resultContent").innerHTML="<h2>あなたのメインタイプ</h2>"+typeHTML(rank[0],false)+
-"<h2>もうひとつのあなたらしさ</h2>"+typeHTML(rank[1],true)+
-'<p class="muted">タイプは性格を決めつけるものではなく、自分を知るためのヒントです。</p>';
+function showResults() {
+  const counts = {};
+  dimensions.forEach(d => counts[d.key] = { A: 0, B: 0 });
+  questions.forEach((q, i) => {
+    counts[q.dimension][answers[i]]++;
+  });
+
+  const patterns = {};
+  let mixedCount = 0;
+  dimensions.forEach(d => {
+    const c = counts[d.key];
+    patterns[d.key] = c.A === c.B ? "mixed" : (c.A > c.B ? "A" : "B");
+    if (patterns[d.key] === "mixed") mixedCount++;
+  });
+
+  const overall = mixedCount >= 3 ? "mixed" : (answers.filter(a => a === "A").length >= 5 ? "A" : "B");
+  const profile = resultProfiles[overall];
+
+  $("resultTitle").textContent = profile.title;
+  $("resultDescription").textContent = profile.description;
+
+  $("strengthTitle").textContent = profile.strengthTitle;
+  $("strengthText").textContent = profile.strengthText;
+  $("relationshipTitle").textContent = profile.relationshipTitle;
+  $("relationshipTip").textContent = profile.relationshipTip;
+  $("loveTitle").textContent = profile.loveTitle;
+  $("loveTip").textContent = profile.loveTip;
+
+  // 各分野の傾向も結果に反映
+  const relationshipPattern = patterns.relationship;
+  if (relationshipPattern === "A") {
+    $("relationshipTitle").textContent = "思いやりを行動で伝えられる";
+    $("relationshipTip").textContent = "相手を気にかけて行動できるのが強み。相手が今はそっとしておいてほしいのか、話を聞いてほしいのかも確かめると、より心地よい関係になりそうです。";
+  } else if (relationshipPattern === "B") {
+    $("relationshipTitle").textContent = "相手のペースを尊重できる";
+    $("relationshipTip").textContent = "相手の気持ちを考えて、慎重に接する傾向がありそう。自分の希望も少しずつ言葉にすると、気を使いすぎずに付き合えそうです。";
+  }
+
+  const distancePattern = patterns.distance;
+  if (distancePattern === "A") {
+    $("relationshipTip").textContent += " 人と関わることで気持ちが整理されることもありそう。ひとりで過ごしたいときは、その時間も大切にしてね。";
+  } else if (distancePattern === "B") {
+    $("relationshipTip").textContent += " ひとりで考える時間を持てるのも強み。必要なときには、信頼できる人を頼ってみても大丈夫です。";
+  }
+
+  const lovePattern = patterns.love;
+  if (lovePattern === "A") {
+    $("loveTitle").textContent = "気持ちを行動で伝える恋愛スタイル";
+    $("loveTip").textContent = "自分からきっかけを作ることができそう。相手の反応を急いで判断せず、会話を重ねながらお互いのペースを見つけていこう。";
+  } else if (lovePattern === "B") {
+    $("loveTitle").textContent = "安心感を育てる恋愛スタイル";
+    $("loveTip").textContent = "落ち着いて関係を深めることを大切にする傾向がありそう。待つだけでなく、うれしかったことや感謝を伝えると、気持ちが届きやすくなりそうです。";
+  } else {
+    $("loveTitle").textContent = "自分たちらしい恋愛を楽しむ";
+    $("loveTip").textContent = "積極的なときも慎重なときもあるあなた。相手に合わせすぎず、ふたりが自然体でいられる距離感を探してみて。";
+  }
+
+  showScreen("resultScreen");
 }
 
-function renderPair(){
-const a=aType[0],b=bType[0];
-const shared=a===b;
-const secondary=aType[1]===b||bType[1]===a;
-const score=shared?92:secondary?82:78;
-const ta=types[a],tb=types[b];
-shareText="TONE相性診断：Aさん "+a+"（"+ta.ja+"）／Bさん "+b+"（"+tb.ja+"）／相性スコア "+score;
-const relationText=relation==="love"?"ふたりの関係を育てるヒント":"お互いを活かすヒント";
-const message=shared?
-"似た感覚を持ちやすいふたり。安心感がある一方、同じところで迷うことも。":
-secondary?
-"大切にしていることに共通点がありそう。似ている部分をきっかけに、違いも楽しく知っていけそう。":
-"感じ方や得意なことに違いがありそう。相手を自分と同じにしようとせず、違いを活かすのがコツ。";
-$("resultContent").innerHTML=
-'<h2>ふたりのTONE</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
-'<div class="typebox" style="background:'+ta.bg+'"><div class="symbol" style="color:'+ta.color+'">'+ta.symbol+'</div><b>Aさん · '+a+'</b><p>'+ta.ja+'</p></div>'+
-'<div class="typebox" style="background:'+tb.bg+'"><div class="symbol" style="color:'+tb.color+'">'+tb.symbol+'</div><b>Bさん · '+b+'</b><p>'+tb.ja+'</p></div></div>'+
-'<div class="score">'+score+' / 100</div><p style="text-align:center" class="muted">相性の目安</p><h2>'+relationText+'</h2><p>'+message+'</p>'+
-'<p class="muted">Aさんへ：'+ta.tip+'<br>Bさんへ：'+tb.tip+'</p>'+
-'<p class="muted">※お試し版のゲーム内スコアであり、科学的な相性判定ではありません。</p>';
+function getShareText() {
+  return [
+    "🌷 TONE診断の結果 🌷",
+    "",
+    "【私のTONE】",
+    $("resultTitle").textContent,
+    "",
+    $("resultDescription").textContent,
+    "",
+    "✨ 隠れた強み",
+    $("strengthTitle").textContent,
+    $("strengthText").textContent,
+    "",
+    "🌿 人間関係のヒント",
+    $("relationshipTitle").textContent,
+    $("relationshipTip").textContent,
+    "",
+    "💕 恋愛のヒント",
+    $("loveTitle").textContent,
+    $("loveTip").textContent,
+    "",
+    "あなたも10問の診断をやってみてね！",
+    getSiteUrl()
+  ].join("\n");
 }
 
-$("start").addEventListener("click",()=>{
-mode=$("mode").value;
-relation=$("relation").value;
-player="A";answers=[];aType=[];bType=[];
-renderQuestion();show("quiz");
-});
-$("startB").addEventListener("click",()=>{
-answers=[];renderQuestion();show("quiz");
-});
-$("again").addEventListener("click",()=>{
-answers=[];aType=[];bType=[];player="A";show("home");
-});
-$("copy").addEventListener("click",()=>{
-if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(shareText).then(()=>{
-$("notice").textContent="結果をコピーしたよ！メッセージに貼り付けてね。";
-}).catch(()=>fallbackCopy());
-}else{fallbackCopy();}
-});
-function fallbackCopy(){
-const area=document.createElement("textarea");
-area.value=shareText;document.body.appendChild(area);
-area.select();
-try{document.execCommand("copy");$("notice").textContent="結果をコピーしたよ！";}
-catch(e){$("notice").textContent=shareText;}
-area.remove();
+function getSiteUrl() {
+  return window.location.href.split("#")[0].split("?")[0];
 }
-})();
+
+async function copyText(text, successMessage) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.focus();
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      if (!ok) throw new Error("copy failed");
+    }
+    $("shareStatus").textContent = successMessage;
+  } catch (error) {
+    $("shareStatus").textContent = "コピーできない場合は、文章を選択してコピーしてね。";
+    window.prompt("こちらをコピーしてください：", text);
+  }
+}
+
+async function shareResult() {
+  const text = getShareText();
+  const url = getSiteUrl();
+  $("shareStatus").textContent = "";
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "TONE診断の結果",
+        text: text,
+        url: url
+      });
+      $("shareStatus").textContent = "シェアメニューを開きました！";
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        await copyText(text, "結果とURLをコピーしました！");
+      }
+    }
+  } else {
+    await copyText(text, "結果とURLをコピーしました！LINEなどに貼り付けてね。");
+  }
+}
+
+$("startBtn").addEventListener("click", startQuiz);
+$("choiceA").addEventListener("click", () => chooseAnswer("A"));
+$("choiceB").addEventListener("click", () => chooseAnswer("B"));
+$("shareBtn").addEventListener("click", shareResult);
+$("copyResultBtn").addEventListener("click", () =>
+  copyText(getShareText(), "結果とURLをコピーしました！LINEなどに貼り付けてね。")
+);
+$("copyUrlBtn").addEventListener("click", () =>
+  copyText(getSiteUrl(), "TONEのURLをコピーしました！友達に送ってね。")
+);
+$("restartBtn").addEventListener("click", startQuiz);
+$("homeBtn").addEventListener("click", () => showScreen("startScreen"));
 </script>
 </body>
 </html>
