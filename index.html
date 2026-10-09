@@ -1,337 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TONE｜あなたらしさを見つける2択テスト</title>
+<title>TONE | あなたらしさを知る2択診断</title>
 <style>
-:root{--ink:#45424b;--muted:#77727e;--paper:#fffdfb;--rose:#bd8295;--lav:#9a8ab9;--gold:#c7a65c;--sage:#819b83;--blue:#7896b5;--teal:#70a9a5;--line:#eee7e7}
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(145deg,#faf3f3,#f7f5fb 55%,#f4f8f5);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--ink);line-height:1.75}
-.wrap{width:min(760px,100%);margin:auto;padding:24px 16px 48px}
-.brand{font-size:13px;letter-spacing:.25em;color:#9a8795;text-align:center;margin:8px 0}
-.hero{text-align:center;padding:24px 10px 28px}
-.logo{font-family:Georgia,serif;font-size:52px;letter-spacing:.18em;margin:0;color:#8f7e8d}
-.hero p{color:var(--muted);font-size:14px;margin:8px 0 0}
-.panel{background:#fffdfcf2;border:1px solid #fff;border-radius:24px;padding:24px;box-shadow:0 12px 35px #62516a0c;margin:14px 0}
-.eyebrow{font-size:11px;letter-spacing:.15em;color:#a18b9b;font-weight:700}
-.h2{font-size:22px;line-height:1.5;margin:6px 0 12px}
-.desc{font-size:14px;color:var(--muted)}
+body{margin:0;background:#f8f3f5;color:#49434a;font-family:Arial,"Yu Gothic",Meiryo,sans-serif;line-height:1.8}
+main{max-width:680px;margin:auto;padding:22px 16px 50px}
+header{text-align:center;padding:20px 0}
+.logo{font-family:Georgia,serif;font-size:52px;letter-spacing:9px;color:#a47e91;margin:0}
+.subtitle{font-size:13px;color:#887b87}
+.card{background:white;border-radius:22px;padding:23px;margin:14px 0;box-shadow:0 5px 25px #78607812}
+h2{font-size:23px;line-height:1.5;margin:8px 0 15px}
+p{margin:10px 0}
+.muted{color:#807781;font-size:14px}
+.label{font-size:12px;letter-spacing:2px;color:#a47e91;font-weight:bold}
 button,select{font:inherit}
-button{cursor:pointer;border:0;border-radius:14px;padding:13px 18px;transition:transform .15s,opacity .15s}
-button:hover{transform:translateY(-1px)}
-.primary{background:#8f7e8d;color:white;width:100%;font-weight:700;margin-top:16px}
-.secondary{background:#f4eef2;color:#766474}
-.choices{display:grid;gap:12px;margin-top:18px}
-.choice{width:100%;text-align:left;background:#fff;border:1px solid var(--line);padding:16px;border-radius:16px;color:var(--ink)}
-.choice:hover{border-color:#c7b5c4;background:#fdf9fc}
-.choice strong{display:block;font-size:15px;margin-bottom:4px}
-.choice span{font-size:13px;color:var(--muted)}
-.progress{height:5px;background:#f0e9ee;border-radius:9px;overflow:hidden;margin:14px 0 22px}
-.bar{height:100%;background:linear-gradient(90deg,#c69bad,#a6a2c8,#8db7ad);width:0;transition:width .25s}
+button{cursor:pointer;border:0;border-radius:14px;padding:14px}
+.primary{width:100%;background:#a47e91;color:white;font-weight:bold;margin-top:15px}
+.choice{width:100%;background:#fffafa;border:1px solid #eadfe6;text-align:left;margin:6px 0;color:#49434a}
+.choice:hover{background:#f8edf3;border-color:#c7a2b6}
+select{width:100%;padding:12px;border:1px solid #e7dce3;border-radius:12px;background:white;margin:5px 0 16px}
+.progress{height:6px;background:#eee7ed;border-radius:8px;margin:15px 0 24px;overflow:hidden}
+#bar{height:100%;width:0;background:#bc91a8}
 .hidden{display:none!important}
-.row{display:flex;gap:10px;flex-wrap:wrap}
-.row button{flex:1;min-width:140px}
-.type-head{display:flex;gap:16px;align-items:center}
-.symbol{width:76px;height:76px;display:grid;place-items:center;border-radius:24px;font-size:39px;flex-shrink:0}
-.type-name{font-size:28px;line-height:1.25;margin:2px 0}
-.type-kicker{font-size:12px;letter-spacing:.1em;color:var(--muted)}
-.meter{height:8px;border-radius:8px;background:#f0edef;overflow:hidden;margin:8px 0 14px}
-.meter div{height:100%;border-radius:8px}
-.pill{display:inline-block;border-radius:999px;padding:4px 10px;background:#f5eff3;color:#796979;font-size:12px;margin:3px 3px 3px 0}
-.question-num{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
-.small{font-size:12px;color:var(--muted)}
-select{border:1px solid var(--line);border-radius:12px;background:white;padding:10px;width:100%;margin:8px 0 4px;color:var(--ink)}
-.score{font-size:40px;font-weight:700;line-height:1.2;color:#927f91}
-.type-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.mini{border:1px solid var(--line);border-radius:18px;padding:14px;text-align:center;background:white}
-.mini .symbol{margin:auto;width:56px;height:56px;font-size:29px;border-radius:18px}
-.mini b{display:block;margin-top:8px}
-.footer{text-align:center;color:#a49aa4;font-size:11px;margin-top:24px}
-@media(max-width:480px){.panel{padding:19px}.logo{font-size:45px}.type-head{align-items:flex-start}.symbol{width:64px;height:64px;font-size:33px}.type-name{font-size:24px}.type-pair{gap:8px}}
+.typebox{border-radius:18px;padding:18px;margin:15px 0;background:#faf5f8}
+.symbol{font-size:46px;line-height:1.2}
+.typeName{font-family:Georgia,serif;font-size:28px;letter-spacing:2px}
+.score{font-size:40px;color:#a47e91;font-weight:bold;text-align:center}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.actions button{flex:1;background:#f2eaf0;color:#6f586a}
+footer{text-align:center;font-size:11px;color:#a99ba6;padding:20px}
 </style>
 </head>
 <body>
-<main class="wrap">
-<div class="brand">FIND YOUR TONE</div>
-<header class="hero">
+<main>
+<header>
+<p class="label">FIND YOUR TONE</p>
 <h1 class="logo">TONE</h1>
-<p>ちがいを知ると、自分にも相手にもやさしくなれる。</p>
+<p class="subtitle">ちがいを知ると、自分にも相手にもやさしくなれる。</p>
 </header>
 
-<section id="home" class="panel">
-<div class="eyebrow">A LITTLE SELF-DISCOVERY</div>
-<h2 class="h2">あなたらしさを、気軽な2択から。</h2>
-<p class="desc">正解・不正解はありません。今の自分に近い方を直感で選んでね。結果は性格を決めつけるものではなく、自分や相手を知るヒントです。</p>
-<label for="mode" class="eyebrow">テストの種類</label>
+<section id="home" class="card">
+<p class="label">SELF DISCOVERY</p>
+<h2>あなたらしさを見つけよう。</h2>
+<p class="muted">10問の2択に答えるだけ。正解はないので、直感で選んでね。</p>
+<label for="mode">診断の種類</label>
 <select id="mode">
-<option value="solo">ひとりで診断する</option>
-<option value="pair">ふたりの相性をみる（同じ端末）</option>
+<option value="solo">ひとりで性格診断</option>
+<option value="pair">ふたりで相性診断</option>
 </select>
-<label for="relation" class="eyebrow">ふたりの関係（相性テストの場合）</label>
+<label for="relation">ふたりの関係</label>
 <select id="relation">
-<option value="romance">恋愛・パートナー</option>
-<option value="friend">友達・家族・仕事仲間</option>
+<option value="love">恋愛・パートナー</option>
+<option value="friend">友達・家族</option>
 </select>
-<button class="primary" id="start">診断をはじめる →</button>
+<button class="primary" id="start">診断スタート →</button>
 </section>
 
-<section id="quiz" class="panel hidden">
-<div class="question-num"><span id="qnum">QUESTION 01 / 10</span><span>直感でOK</span></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
-<h2 class="h2" id="qtext"></h2>
-<div class="choices" id="choices"></div>
-<p class="small">迷ったら「より自分に近いかも」で選んでね。</p>
+<section id="quiz" class="card hidden">
+<p class="label" id="counter">QUESTION 1 / 10</p>
+<div class="progress"><div id="bar"></div></div>
+<h2 id="question"></h2>
+<div id="answers"></div>
+<p class="muted">深く考えすぎず、今の自分に近い方を選んでね。</p>
 </section>
 
-<section id="pass" class="panel hidden">
-<div class="eyebrow">PASS THE PHONE</div>
-<h2 class="h2">Aさんの回答、おつかれさま！</h2>
-<p class="desc">回答を保存したよ。ここで端末をBさんに渡してね。Bさんは自分の感覚で答えてください。</p>
-<button class="primary" id="startB">Bさんの診断をはじめる →</button>
+<section id="pass" class="card hidden">
+<p class="label">NEXT PLAYER</p>
+<h2>Bさんの番だよ！</h2>
+<p>端末をBさんに渡して、本人の感覚で答えてもらってね。</p>
+<button class="primary" id="startB">Bさんの診断を始める →</button>
 </section>
 
-<section id="result" class="panel hidden">
-<div class="eyebrow">YOUR TONE</div>
-<div id="resultBody"></div>
-<div class="row" style="margin-top:20px">
-<button class="secondary" id="share">結果をコピー</button>
-<button class="secondary" id="restart">もう一度診断</button>
+<section id="result" class="card hidden">
+<p class="label">YOUR TONE</p>
+<div id="resultContent"></div>
+<div class="actions">
+<button id="copy">結果をコピー</button>
+<button id="again">もう一度診断</button>
 </div>
-<p class="small" id="shareNote">結果をコピーして、友達にシェアできるよ。</p>
+<p id="notice" class="muted"></p>
 </section>
-
-<div class="footer">TONE · A small game to understand each other</div>
+<footer>TONE · Understand yourself, understand each other.</footer>
 </main>
 
 <script>
-const qs=[
-['出かける準備が予定より早く終わった。出発まで30分ある。','忘れ物がないか、もう一度確認する','お茶でも飲みながらゆっくり待つ','LEAF','MOON'],
-['友達から急に「今から会える？」と連絡が来た。','面白そう！行けるならすぐ準備する','予定や気分を確認してから決める','SUN','MOON'],
-['誰かに褒められたとき、いちばん近い反応は？','うれしい！気持ちをそのまま伝える','照れつつ、どこがよかったか考える','ROSE','STAR'],
-['苦手だなと思うことを頼まれたら？','できる範囲を整理して誠実に対応する','やり方を工夫して負担を減らす','LEAF','WAVE'],
-['予定が急に変更になったら？','新しい予定も楽しめるよう切り替える','まず気持ちや段取りを整えたい','SUN','MOON'],
-['友達が落ち込んでいるときは？','気持ちに寄り添って話を聞く','別の視点やアイデアを一緒に探す','ROSE','STAR'],
-['休日の過ごし方、理想に近いのは？','気分に合わせて自由に過ごす','ひとり時間を確保してゆっくりする','WAVE','MOON'],
-['誰かと意見が違ったときは？','相手の気持ちも大切にして話し合う','事実や約束を整理して落としどころを探す','ROSE','LEAF'],
-['新しいことを始めるときは？','まずやってみて、動きながら考える','状況を見ながら無理のない形にする','SUN','WAVE'],
-['気になるものを見つけたときは？','自分なりの視点で深掘りしてみる','慣れた方法や確かな情報を参考にする','STAR','LEAF']
+(function(){
+"use strict";
+
+const questions=[
+["予定より早く準備が終わった。出発まで30分ある。","忘れ物がないかもう一度確認する","お茶でも飲んでゆっくり待つ","LEAF","MOON"],
+["友達から急に「今から会える？」と連絡が来た。","行けるならすぐ準備する","予定や気分を確認して決める","SUN","MOON"],
+["誰かに褒められたときは？","素直にうれしさを伝える","照れながら、どこがよかったか考える","ROSE","STAR"],
+["苦手なことを頼まれたら？","できる範囲を整理して対応する","やり方を工夫して取り組む","LEAF","WAVE"],
+["予定が急に変更になったら？","新しい予定も楽しめるよう切り替える","まず気持ちや段取りを整える","SUN","MOON"],
+["友達が落ち込んでいるときは？","気持ちに寄り添って話を聞く","別の視点やアイデアを一緒に探す","ROSE","STAR"],
+["休日の理想に近いのは？","気分に合わせて自由に過ごす","ひとり時間を大切にして過ごす","WAVE","MOON"],
+["誰かと意見が違ったときは？","相手の気持ちも考えて話し合う","事実や約束を整理して考える","ROSE","LEAF"],
+["新しいことを始めるときは？","まずやってみる","様子を見ながら進める","SUN","WAVE"],
+["気になるものを見つけたときは？","自分なりに深く調べてみる","確かな情報や経験を参考にする","STAR","LEAF"]
 ];
 
 const types={
-ROSE:{
-symbol:'✿',name:'ROSE',ja:'つながりを育てる人',
-color:'#bd8295',bg:'#f7e9ee',
-desc:'相手の気持ちを感じ取り、心の距離を縮めるのが得意。思いやりが自然に行動に表れます。',
-good:'共感力・あたたかさ',
-care:'相手を優先しすぎず、自分の気持ちも言葉にしてみて。'
-},
-MOON:{
-symbol:'☾',name:'MOON',ja:'自分のリズムを大切にする人',
-color:'#9a8ab9',bg:'#efebf7',
-desc:'自分の内側を見つめ、落ち着いて考えるタイプ。自分のペースを守ることで力を発揮します。',
-good:'内省・落ち着き',
-care:'考えがまとまる前でも、少しだけ共有すると伝わりやすいよ。'
-},
-SUN:{
-symbol:'☼',name:'SUN',ja:'動いて道をひらく人',
-color:'#c7a65c',bg:'#f8f1dc',
-desc:'まず一歩踏み出して、経験しながら前に進むタイプ。周りにも明るい勢いを届けます。',
-good:'行動力・前向きさ',
-care:'スピードが違う人には、少し待つ時間もプレゼントして。'
-},
-LEAF:{
-symbol:'❧',name:'LEAF',ja:'安心を積み重ねる人',
-color:'#819b83',bg:'#eaf1e9',
-desc:'約束や日々の積み重ねを大切にするタイプ。誠実さと安定感で周りを支えます。',
-good:'誠実さ・安定感',
-care:'いつも通りでない方法にも、試しに少し心を開いてみて。'
-},
-STAR:{
-symbol:'✦',name:'STAR',ja:'好奇心で世界を広げる人',
-color:'#7896b5',bg:'#e9f0f7',
-desc:'気づきや発見を楽しみ、自分ならではの視点を持つタイプ。新しい可能性を見つけるのが得意。',
-good:'好奇心・独自の視点',
-care:'アイデアを実際の一歩に落とし込むと、魅力がさらに伝わるよ。'
-},
-WAVE:{
-symbol:'〰',name:'WAVE',ja:'柔らかく調整する人',
-color:'#70a9a5',bg:'#e5f3f1',
-desc:'状況に合わせて柔軟に動き、バランスをとるタイプ。変化の中でも自分なりの流れを見つけます。',
-good:'柔軟性・調整力',
-care:'合わせるだけでなく、自分がどうしたいかも確かめてみて。'
-}
+ROSE:{symbol:"✿",ja:"つながりを育てる人",color:"#b77e94",bg:"#f8e9ef",good:"共感力・あたたかさ",desc:"相手の気持ちを大切にし、心の距離を縮めるのが得意。思いやりが自然に行動に表れます。",tip:"相手を優先しすぎず、自分の気持ちも言葉にしてみて。"},
+MOON:{symbol:"☾",ja:"自分のリズムを大切にする人",color:"#9383b6",bg:"#efebf8",good:"内省・落ち着き",desc:"自分の内側を見つめ、じっくり考えるタイプ。自分のペースを守ることで力を発揮します。",tip:"考えがまとまる前でも、少し共有すると伝わりやすいよ。"},
+SUN:{symbol:"☼",ja:"動いて道をひらく人",color:"#b99a50",bg:"#faf3dd",good:"行動力・前向きさ",desc:"まず一歩踏み出し、経験しながら前に進むタイプ。周りにも明るい勢いを届けます。",tip:"自分とスピードが違う人を待つことも大切に。"},
+LEAF:{symbol:"❧",ja:"安心を積み重ねる人",color:"#789579",bg:"#eaf2e9",good:"誠実さ・安定感",desc:"約束や日々の積み重ねを大切にするタイプ。誠実さと安定感で周りを支えます。",tip:"いつもと違う方法も、試しに少し取り入れてみて。"},
+STAR:{symbol:"✦",ja:"好奇心で世界を広げる人",color:"#7291b2",bg:"#eaf1f8",good:"好奇心・独自の視点",desc:"発見を楽しみ、自分ならではの視点を持つタイプ。新しい可能性を見つけるのが得意です。",tip:"アイデアを小さな一歩にすると、魅力がさらに伝わるよ。"},
+WAVE:{symbol:"〰",ja:"柔らかく調整する人",color:"#65a29c",bg:"#e7f4f1",good:"柔軟性・調整力",desc:"状況に合わせて柔軟に動き、バランスをとるタイプ。変化の中でも自分の流れを見つけます。",tip:"周りに合わせるだけでなく、自分の希望も確かめてみて。"}
 };
 
-let mode='solo',relation='romance',person='A',answers=[],aAnswers=[],aType=null,bType=null,lastText='';
 const $=id=>document.getElementById(id);
+let mode="solo",relation="love",player="A",answers=[],aType=[],bType=[],shareText="";
 
 function show(id){
-['home','quiz','pass','result'].forEach(x=>{
-$(x).classList.toggle('hidden',x!==id);
-});
+["home","quiz","pass","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));
+window.scrollTo(0,0);
 }
 
-$('start').onclick=()=>{
-mode=$('mode').value;
-relation=$('relation').value;
-person='A';
-answers=[];
-aAnswers=[];
-aType=null;
-bType=null;
-renderQ();
-show('quiz');
-};
+function rankTypes(ans){
+const scores={ROSE:0,MOON:0,SUN:0,LEAF:0,STAR:0,WAVE:0};
+ans.forEach((choice,i)=>{
+const type=questions[i][choice===0?3:4];
+scores[type]++;
+});
+return Object.keys(scores).sort((a,b)=>scores[b]-scores[a]||Object.keys(types).indexOf(a)-Object.keys(types).indexOf(b));
+}
 
-function renderQ(){
-let i=answers.length;
-$('qnum').textContent=`QUESTION ${String(i+1).padStart(2,'0')} / ${qs.length}`;
-$('bar').style.width=`${i/qs.length*100}%`;
-$('qtext').textContent=qs[i][0];
-$('choices').innerHTML='';
-
-[1,2].forEach(n=>{
-let b=document.createElement('button');
-b.className='choice';
-b.innerHTML=`<strong>${n===1?'①':'②'} ${qs[i][n]}</strong><span>今の自分に近いのはこっち</span>`;
-b.onclick=()=>{
+function renderQuestion(){
+const i=answers.length;
+$("counter").textContent="QUESTION "+(i+1)+" / "+questions.length;
+$("bar").style.width=(i/questions.length*100)+"%";
+$("question").textContent=questions[i][0];
+$("answers").innerHTML="";
+[0,1].forEach(n=>{
+const btn=document.createElement("button");
+btn.className="choice";
+btn.textContent=(n===0?"① ":"② ")+questions[i][n+1];
+btn.addEventListener("click",()=>{
 answers.push(n);
-if(answers.length<qs.length){
-renderQ();
-}else{
-finishPerson();
-}
-};
-$('choices').appendChild(b);
+if(answers.length<questions.length){renderQuestion();}
+else{finishPlayer();}
+});
+$("answers").appendChild(btn);
 });
 }
 
-function getType(ans){
-let s={ROSE:0,MOON:0,SUN:0,LEAF:0,STAR:0,WAVE:0};
-ans.forEach((n,i)=>{
-s[qs[i][n===1?3:4]]++;
-});
-return Object.keys(s)
-.sort((a,b)=>s[b]-s[a]||Object.keys(s).indexOf(a)-Object.keys(s).indexOf(b))
-.slice(0,2);
-}
-
-function finishPerson(){
-if(person==='A'&&mode==='pair'){
-aAnswers=answers.slice();
-aType=getType(aAnswers);
-person='B';
+function finishPlayer(){
+if(mode==="pair"&&player==="A"){
+aType=rankTypes(answers);
+player="B";
 answers=[];
-show('pass');
+show("pass");
 return;
 }
-if(mode==='pair'){
-bType=getType(answers);
+if(mode==="pair"){
+bType=rankTypes(answers);
 renderPair();
 }else{
-renderSolo(getType(answers));
+renderSolo(rankTypes(answers));
 }
-show('result');
+show("result");
 }
 
-$('startB').onclick=()=>{
-answers=[];
-renderQ();
-show('quiz');
-};
-
-function typeCard(t,secondary=false){
-let x=types[t];
-return `<div class="type-head">
-<div class="symbol" style="background:${x.bg};color:${x.color}">${x.symbol}</div>
-<div>
-<div class="type-kicker">${secondary?'YOUR SUB TONE':'YOUR MAIN TONE'}</div>
-<div class="type-name" style="color:${x.color}">${x.name}</div>
-<b>${x.ja}</b>
-</div>
-</div>
-<p>${x.desc}</p>
-<span class="pill">${x.good}</span>
-${secondary?'':`<p class="desc">ちょっとしたヒント：${x.care}</p>`}`;
+function typeHTML(id,sub){
+const t=types[id];
+return '<div class="typebox" style="background:'+t.bg+';color:#49434a">'+
+'<div class="symbol" style="color:'+t.color+'">'+t.symbol+'</div>'+
+'<div class="typeName" style="color:'+t.color+'">'+t.name+'</div>'+
+'<h2>'+t.ja+'</h2><p>'+t.desc+'</p>'+
+'<p><strong>あなたの強み：</strong>'+t.good+'</p>'+
+(sub?"":'<p><strong>ヒント：</strong>'+t.tip+'</p>')+
+'</div>';
 }
 
 function renderSolo(rank){
-lastText=`TONE診断結果：${types[rank[0]].name} ${types[rank[0]].ja}／サブ ${types[rank[1]].name}`;
-$('resultBody').innerHTML=`
-<div class="eyebrow">あなたのメインタイプ</div>
-${typeCard(rank[0])}
-<hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
-<div class="eyebrow">もうひとつのあなたらしさ</div>
-${typeCard(rank[1],true)}
-<p class="desc" style="margin-top:20px">タイプは固定された性格ではなく、そのときの傾向を知るためのヒントです。</p>`;
+shareText="TONE診断結果："+rank[0]+"（"+types[rank[0]].ja+"）／サブ："+rank[1]+"（"+types[rank[1]].ja+"）";
+$("resultContent").innerHTML="<h2>あなたのメインタイプ</h2>"+typeHTML(rank[0],false)+
+"<h2>もうひとつのあなたらしさ</h2>"+typeHTML(rank[1],true)+
+'<p class="muted">タイプは性格を決めつけるものではなく、自分を知るためのヒントです。</p>';
 }
 
 function renderPair(){
-let x=types[aType[0]],y=types[bType[0]];
-let shared=aType[0]===bType[0];
-let secondary=aType[1]===bType[0]||bType[1]===aType[0];
-
-let score=shared?92:secondary?82:
-({
-ROSE:['MOON','LEAF','WAVE'],
-MOON:['ROSE','STAR','WAVE'],
-SUN:['STAR','WAVE','LEAF'],
-LEAF:['ROSE','SUN','WAVE'],
-STAR:['SUN','MOON','WAVE'],
-WAVE:['ROSE','MOON','SUN','LEAF','STAR']
-})[aType[0]].includes(bType[0])?78:70;
-
-let rel=relation==='romance'?'ふたりの関係を育てるヒント':'お互いを活かすヒント';
-
-lastText=`TONE相性結果：A ${x.name} ${x.ja}／B ${y.name} ${y.ja}／相性スコア ${score}`;
-
-$('resultBody').innerHTML=`
-<div class="eyebrow">TWO TONES, ONE RELATIONSHIP</div>
-<h2 class="h2">違うところも、似ているところも。</h2>
-<div class="type-pair">
-<div class="mini">
-<div class="symbol" style="background:${x.bg};color:${x.color}">${x.symbol}</div>
-<b>Aさん · ${x.name}</b>
-<div class="small">${x.ja}</div>
-</div>
-<div class="mini">
-<div class="symbol" style="background:${y.bg};color:${y.color}">${y.symbol}</div>
-<b>Bさん · ${y.name}</b>
-<div class="small">${y.ja}</div>
-</div>
-</div>
-<div style="text-align:center;margin:22px 0">
-<div class="score">${score}<span style="font-size:16px"> / 100</span></div>
-<div class="desc">相性の目安（ゲーム内スコア）</div>
-</div>
-<h3>${rel}</h3>
-<p>${shared?
-'ふたりは似た感覚を持ちやすい組み合わせ。安心感がある一方、同じところで迷うことも。':
+const a=aType[0],b=bType[0];
+const shared=a===b;
+const secondary=aType[1]===b||bType[1]===a;
+const score=shared?92:secondary?82:78;
+const ta=types[a],tb=types[b];
+shareText="TONE相性診断：Aさん "+a+"（"+ta.ja+"）／Bさん "+b+"（"+tb.ja+"）／相性スコア "+score;
+const relationText=relation==="love"?"ふたりの関係を育てるヒント":"お互いを活かすヒント";
+const message=shared?
+"似た感覚を持ちやすいふたり。安心感がある一方、同じところで迷うことも。":
 secondary?
-'大切にしていることに共通点がありそう。似ている部分をきっかけに、違いも楽しく知っていけそう。':
-'得意なことや感じ方に違いがありそう。相手を自分と同じにしようとせず、違いを役割分担に変えるのがコツ。'}</p>
-<p class="desc">Aさん：${x.care}<br>Bさん：${y.care}</p>
-<p class="small">※このスコアは10問の回答から作ったお試し版の目安で、科学的な相性判定ではありません。</p>`;
+"大切にしていることに共通点がありそう。似ている部分をきっかけに、違いも楽しく知っていけそう。":
+"感じ方や得意なことに違いがありそう。相手を自分と同じにしようとせず、違いを活かすのがコツ。";
+$("resultContent").innerHTML=
+'<h2>ふたりのTONE</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+'<div class="typebox" style="background:'+ta.bg+'"><div class="symbol" style="color:'+ta.color+'">'+ta.symbol+'</div><b>Aさん · '+a+'</b><p>'+ta.ja+'</p></div>'+
+'<div class="typebox" style="background:'+tb.bg+'"><div class="symbol" style="color:'+tb.color+'">'+tb.symbol+'</div><b>Bさん · '+b+'</b><p>'+tb.ja+'</p></div></div>'+
+'<div class="score">'+score+' / 100</div><p style="text-align:center" class="muted">相性の目安</p><h2>'+relationText+'</h2><p>'+message+'</p>'+
+'<p class="muted">Aさんへ：'+ta.tip+'<br>Bさんへ：'+tb.tip+'</p>'+
+'<p class="muted">※お試し版のゲーム内スコアであり、科学的な相性判定ではありません。</p>';
 }
 
-$('share').onclick=async()=>{
-try{
-await navigator.clipboard.writeText(lastText);
-$('shareNote').textContent='コピーできたよ！メッセージなどに貼り付けてシェアしてね。';
-}catch(e){
-$('shareNote').textContent=lastText+'（この文章を選択してコピーしてね）';
+$("start").addEventListener("click",()=>{
+mode=$("mode").value;
+relation=$("relation").value;
+player="A";answers=[];aType=[];bType=[];
+renderQuestion();show("quiz");
+});
+$("startB").addEventListener("click",()=>{
+answers=[];renderQuestion();show("quiz");
+});
+$("again").addEventListener("click",()=>{
+answers=[];aType=[];bType=[];player="A";show("home");
+});
+$("copy").addEventListener("click",()=>{
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(shareText).then(()=>{
+$("notice").textContent="結果をコピーしたよ！メッセージに貼り付けてね。";
+}).catch(()=>fallbackCopy());
+}else{fallbackCopy();}
+});
+function fallbackCopy(){
+const area=document.createElement("textarea");
+area.value=shareText;document.body.appendChild(area);
+area.select();
+try{document.execCommand("copy");$("notice").textContent="結果をコピーしたよ！";}
+catch(e){$("notice").textContent=shareText;}
+area.remove();
 }
-};
-
-$('restart').onclick=()=>{
-answers=[];
-aAnswers=[];
-aType=null;
-bType=null;
-person='A';
-show('home');
-};
+})();
 </script>
 </body>
 </html>
