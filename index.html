@@ -685,5 +685,282 @@ $("restartBtn").addEventListener("click",() => {
 });
 $("homeBtn").addEventListener("click",() => showScreen("startScreen"));
 </script>
+  
+<!-- TONE 相談機能 -->
+<style>
+#toneConsult {
+  font-family: inherit;
+  color: #514653;
+}
+#toneConsult * {
+  box-sizing: border-box;
+}
+#toneConsultButton {
+  position: fixed;
+  right: 18px;
+  bottom: 20px;
+  z-index: 9998;
+  border: 0;
+  border-radius: 28px;
+  padding: 14px 20px;
+  background: #c78da9;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 4px 16px #6b435333;
+  cursor: pointer;
+}
+#toneConsultPanel {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  overflow-y: auto;
+  padding: 24px 14px;
+  background: #fdf8fb;
+}
+#toneConsultPanel.open {
+  display: block;
+}
+#toneConsultCard {
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 24px 20px;
+  border-radius: 22px;
+  background: white;
+  border: 1px solid #f0dce7;
+  box-shadow: 0 8px 30px #6b435315;
+}
+#toneConsultCard h2 {
+  text-align: center;
+  color: #a66587;
+  font-size: 24px;
+}
+#toneConsultCard p {
+  line-height: 1.8;
+}
+#toneConsultCard .toneChoices {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 22px;
+}
+#toneConsultCard .toneChoice {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #ead6e1;
+  border-radius: 14px;
+  background: #fffafd;
+  color: #514653;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+#toneConsultCard .toneChoice:focus,
+#toneConsultCard .toneChoice:hover {
+  background: #f7eaf1;
+  border-color: #c78da9;
+}
+#toneConsultCard .toneChoice.selected {
+  background: #f4e3ed;
+  border: 2px solid #bd7fa0;
+}
+#toneConsultCard .tonePrimary {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 24px;
+  background: #bd7fa0;
+  color: white;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+#toneConsultCard .toneSecondary {
+  display: block;
+  margin: 14px auto 0;
+  padding: 8px 14px;
+  border: 0;
+  background: transparent;
+  color: #91617b;
+  font: inherit;
+  cursor: pointer;
+}
+#toneConsultAnswer {
+  display: none;
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #fbf0f6;
+  line-height: 1.9;
+}
+#toneConsultAnswer h3 {
+  color: #a66587;
+}
+</style>
+
+<button id="toneConsultButton" type="button">
+  ♡ 相談してみる
+</button>
+
+<div id="toneConsult">
+  <div id="toneConsultPanel" role="dialog" aria-modal="true"
+       aria-labelledby="toneConsultTitle">
+    <div id="toneConsultCard">
+      <h2 id="toneConsultTitle">TONE お悩み相談室</h2>
+      <p>うまく言葉にできなくても大丈夫。
+        今の気持ちに近いものを選んでみてね。</p>
+
+      <p><strong>STEP 1　何について相談したい？</strong></p>
+      <div class="toneChoices" id="toneConsultCategories">
+        <button class="toneChoice" type="button" data-value="恋愛">♡ 恋愛・パートナー</button>
+        <button class="toneChoice" type="button" data-value="友人">✿ 友人・家族との関係</button>
+        <button class="toneChoice" type="button" data-value="職場">☾ 職場・仕事の人間関係</button>
+      </div>
+
+      <p><strong>STEP 2　今、どんなことで悩んでいる？</strong></p>
+      <div class="toneChoices" id="toneConsultProblems">
+        <button class="toneChoice" type="button" data-value="気持ちがわからない">相手の気持ちがわからない</button>
+        <button class="toneChoice" type="button" data-value="本音を言えない">本音をうまく伝えられない</button>
+        <button class="toneChoice" type="button" data-value="距離感に悩む">距離の取り方に悩んでいる</button>
+        <button class="toneChoice" type="button" data-value="すれ違い">すれ違いやケンカがあった</button>
+      </div>
+
+      <p><strong>STEP 3　今の気持ちに近いものは？</strong></p>
+      <div class="toneChoices" id="toneConsultFeelings">
+        <button class="toneChoice" type="button" data-value="不安">不安で、考えすぎてしまう</button>
+        <button class="toneChoice" type="button" data-value="悲しい">悲しい・寂しい</button>
+        <button class="toneChoice" type="button" data-value="イライラ">イライラ・モヤモヤする</button>
+        <button class="toneChoice" type="button" data-value="迷っている">どうすればいいか迷っている</button>
+      </div>
+
+      <button id="toneConsultSubmit" class="tonePrimary" type="button">
+        私に合うアドバイスを見る
+      </button>
+
+      <div id="toneConsultAnswer" aria-live="polite"></div>
+
+      <button id="toneConsultReset" class="toneSecondary" type="button">
+        選び直す
+      </button>
+      <button id="toneConsultClose" class="toneSecondary" type="button">
+        × 相談を閉じる
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const panel = document.getElementById("toneConsultPanel");
+  if (!panel || panel.dataset.ready === "yes") return;
+  panel.dataset.ready = "yes";
+
+  const selections = {
+    category: "",
+    problem: "",
+    feeling: ""
+  };
+
+  function chooseGroup(groupId, key) {
+    const group = document.getElementById(groupId);
+    group.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-value]");
+      if (!button) return;
+
+      group.querySelectorAll("button").forEach(function (item) {
+        item.classList.remove("selected");
+        item.setAttribute("aria-pressed", "false");
+      });
+
+      button.classList.add("selected");
+      button.setAttribute("aria-pressed", "true");
+      selections[key] = button.dataset.value;
+    });
+  }
+
+  chooseGroup("toneConsultCategories", "category");
+  chooseGroup("toneConsultProblems", "problem");
+  chooseGroup("toneConsultFeelings", "feeling");
+
+  document.getElementById("toneConsultButton").addEventListener("click", function () {
+    panel.classList.add("open");
+  });
+
+  document.getElementById("toneConsultClose").addEventListener("click", function () {
+    panel.classList.remove("open");
+  });
+
+  document.getElementById("toneConsultReset").addEventListener("click", function () {
+    Object.keys(selections).forEach(function (key) {
+      selections[key] = "";
+    });
+    panel.querySelectorAll(".toneChoice").forEach(function (button) {
+      button.classList.remove("selected");
+      button.setAttribute("aria-pressed", "false");
+    });
+    document.getElementById("toneConsultAnswer").style.display = "none";
+  });
+
+  document.getElementById("toneConsultSubmit").addEventListener("click", function () {
+    const answer = document.getElementById("toneConsultAnswer");
+
+    if (!selections.category || !selections.problem || !selections.feeling) {
+      alert("STEP 1〜3から、それぞれひとつずつ選んでね。");
+      return;
+    }
+
+    let advice = "";
+
+    if (selections.problem === "気持ちがわからない") {
+      advice = "相手の気持ちは、考えるだけでは答えが出ないこともあるよ。";
+      advice += "今は相手の反応を決めつけず、実際にあったことと、自分が想像していることを分けてみよう。";
+    } else if (selections.problem === "本音を言えない") {
+      advice = "本音を全部伝えようとしなくても大丈夫。";
+      advice += "まずは「私はこう感じたんだ」と、自分の気持ちをひとつだけ伝えるところから始めてみよう。";
+    } else if (selections.problem === "距離感に悩む") {
+      advice = "近づくことだけが、良い関係をつくる方法ではないよ。";
+      advice += "自分が無理をしていないかを確かめながら、心地よい距離を少しずつ探してみよう。";
+    } else {
+      advice = "すぐに結論を出さなくても大丈夫。";
+      advice += "まずは相手を責める言葉ではなく、自分が困ったことや本当はどうしたかったのかを整理してみよう。";
+    }
+
+    if (selections.feeling === "不安") {
+      advice += " 不安が強いときは、今すぐ答えを出さず、少し落ち着いてから考えるのもひとつの方法だよ。";
+    } else if (selections.feeling === "悲しい") {
+      advice += " 悲しいと感じる自分の気持ちも、大切にしてね。無理に元気になろうとしなくていいんだよ。";
+    } else if (selections.feeling === "イライラ") {
+      advice += " 気持ちが強く動いているときは、伝える前に少し時間を置くと、本当に伝えたいことが見えやすくなるよ。";
+    } else {
+      advice += " 迷ったときは、相手がどう思うかだけでなく、自分がどうしたいかも考えてみよう。";
+    }
+
+    const categoryNote = {
+      "恋愛": "恋愛では、相手の気持ちと同じくらい、自分が安心していられる関係かどうかも大切。",
+      "友人": "友人や家族でも、考え方が違うことはあるよ。わかり合うことと、いつも同じ意見でいることは別なんだ。",
+      "職場": "職場では、気持ちの問題と仕事上の問題を分けて考えると、次の一歩が見つかりやすいよ。"
+    };
+
+    answer.innerHTML = "";
+    const heading = document.createElement("h3");
+    heading.textContent = "あなたへのヒント ✿";
+    const summary = document.createElement("p");
+    summary.textContent = "相談テーマ：" + selections.category +
+      " ／ お悩み：" + selections.problem +
+      " ／ 今の気持ち：" + selections.feeling;
+    const adviceText = document.createElement("p");
+    adviceText.textContent = advice;
+    const note = document.createElement("p");
+    note.textContent = categoryNote[selections.category];
+    const closing = document.createElement("p");
+    closing.textContent = "これは選択内容をもとにした最初のヒントだよ。あなたの状況に合わせて、もう少し詳しく考えていこう。";
+
+    answer.append(heading, summary, adviceText, note, closing);
+    answer.style.display = "block";
+    answer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+})();
+</script>
+<!-- TONE 相談機能ここまで -->
 </body>
 </html>
