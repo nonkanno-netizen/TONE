@@ -8,27 +8,25 @@
 <meta name="description" content="TONEの10問診断。自分らしさや、ふたりの相性を楽しく発見しよう。">
 <style>
 :root {
-  --ink:#51465d; --muted:#8b8197; --purple:#8b73bd;
-  --lavender:#f0e9fb; --pink:#fae8ef; --green:#eaf4ec;
-  --cream:#fffaf4; --line:#e8deef;
+  --ink:#171717; --muted:#666666; --purple:#b18498;
+  --lavender:#f7eff2; --pink:#f0d4d0; --green:#eaf4ec;
+  --cream:#fffdf9; --line:#e7e5e3;
 }
 * {box-sizing:border-box}
 body {
   margin:0;padding:16px 10px 30px;color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
   line-height:1.8;
-  background:radial-gradient(ellipse at 8% 12%,#f5eafa,transparent 32%),
-  radial-gradient(ellipse at 95% 40%,#fcecf0,transparent 30%),
-  linear-gradient(145deg,#fcf8ff,#fffaf5 60%,#f4faf6);
+  background:#fffdfb;
 }
 button,input {font:inherit}
 button {cursor:pointer}
 button:focus-visible,input:focus-visible {outline:3px solid #ad91d8;outline-offset:3px}
-.container {max-width:660px;margin:auto}
-header {text-align:center;padding:5px 0 18px}
-.logo {font-size:39px;font-weight:850;letter-spacing:9px;color:var(--purple);padding-left:9px;line-height:1.3}
+.container {max-width:560px;margin:auto}
+header {text-align:center;padding:12px 0 8px}
+.logo {font-size:48px;font-weight:850;letter-spacing:4px;color:var(--purple);padding-left:4px;line-height:1.3}
 .tagline {font-size:12px;letter-spacing:1.5px;color:var(--muted)}
-.card {background:rgba(255,255,255,.93);border:1px solid #eee5f2;border-radius:26px;padding:23px 21px;box-shadow:0 12px 34px #5c467712;overflow:hidden}
+.card {background:#fff;border:1px solid #eeeae7;border-radius:30px;padding:25px 20px;box-shadow:none;overflow:hidden}
 h1 {font-size:25px;line-height:1.55;margin:0 0 10px}
 h2 {font-size:22px;line-height:1.55;margin:0 0 12px}
 h3 {font-size:16px;line-height:1.5;margin:0 0 6px}
@@ -42,7 +40,7 @@ p {margin:8px 0 14px}
   display:block;width:100%;border-radius:16px;padding:13px 15px;
   transition:background .15s,transform .15s;
 }
-.primary {background:var(--purple);color:white;border:0;font-weight:700;margin-top:12px;box-shadow:0 5px 12px #8b73bd2e}
+.primary {background:var(--purple);color:white;border:0;font-weight:700;margin-top:12px;box-shadow:0 5px 12px #b184982e}
 .primary:hover {background:#7760a6}
 .secondary {background:white;color:#7d66a8;border:1px solid #e0d3ed;font-weight:600;margin-top:9px}
 .secondary:hover {background:#faf6ff}
@@ -79,6 +77,70 @@ p {margin:8px 0 14px}
   .card {padding:20px 14px;border-radius:23px}
   h1 {font-size:23px}.question {font-size:20px}.logo {font-size:36px}
 }
+
+/* 新しいTONEトップ画面 */
+.home-title {font-size:25px;line-height:1.7;margin:12px 0}
+.home-lead {font-size:14px;color:#746879;max-width:440px;margin:0 auto 22px}
+.welcome-art {position:relative;width:100%;max-width:310px;height:190px;margin:0 auto 8px;overflow:hidden}
+.soft-orbit {position:absolute;width:190px;height:170px;left:calc(50% - 95px);top:10px;border-radius:48% 52% 55% 45%;background:linear-gradient(145deg,#f8e8ee,#f0e8fa 65%,#fff4e2)}
+.person {position:absolute;bottom:9px;width:105px;height:145px}
+.person-left {left:calc(50% - 100px);transform:rotate(-5deg)}
+.person-right {right:calc(50% - 100px);transform:rotate(5deg)}
+.person .face {position:absolute;top:28px;left:29px;width:48px;height:57px;border-radius:45% 45% 48% 48%;background:#f2c9ad;z-index:2}
+.person .hair {position:absolute;top:17px;left:23px;width:60px;height:63px;border-radius:50% 50% 35% 35%;background:#705a58;z-index:3}
+.person-left .hair:after {content:"";position:absolute;right:-1px;top:22px;width:17px;height:39px;background:#705a58;border-radius:0 0 12px 12px}
+.person-right .hair {background:#4e4a59}
+.person-right .hair:after {content:"";position:absolute;left:0;top:20px;width:19px;height:40px;background:#4e4a59;border-radius:0 0 12px 12px}
+.person .body {position:absolute;bottom:0;left:8px;width:90px;height:83px;border-radius:42px 42px 13px 13px;background:#d6c4e9}
+.person-right .body {background:#e8bfcf}
+.spark {position:absolute;z-index:4;color:#c6a4cf;font-size:25px}
+.spark-one {top:22px;left:43px}.spark-two {top:36px;right:41px;color:#d8b76d}
+.tiny-heart {position:absolute;z-index:5;left:calc(50% - 12px);top:66px;color:#fff;font-size:28px;text-shadow:0 1px 6px #d89bb6}
+.entry-card {display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:16px 14px;margin:12px 0;border-radius:19px;border:1px solid #eadce9;background:rgba(255,255,255,.88);color:var(--ink);box-shadow:0 6px 18px #66506d0d;min-height:84px}
+.entry-card:hover {transform:translateY(-1px);border-color:#d4b8d7;background:#fff}
+.entry-diagnosis {border-left:4px solid #d7bfdc}.entry-consult {border-left:4px solid #e7b8c9}
+.entry-icon {display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:50%;background:#f5eaf4;color:#a47fa9;font-size:24px}
+.entry-consult .entry-icon {background:#fbedf1;color:#c0809d}
+.entry-copy {display:flex;flex-direction:column;gap:3px;flex:1}
+.entry-copy strong {font-size:14px;line-height:1.5}.entry-copy small {font-size:11px;color:var(--muted);line-height:1.5}
+.entry-arrow {font-size:27px;color:#b19ab7}
+.text-link {border:0;background:transparent;color:#8b73bd;text-decoration:underline;padding:10px;margin-top:3px}
+.consult-topic {min-height:76px}.consult-topic .choice-text {display:flex;flex-direction:column;gap:3px}
+.consult-topic small {font-size:11px;color:var(--muted)}
+.consult-answer {display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:15px;padding:14px;margin:10px 0;color:var(--ink)}
+.consult-answer:hover {background:#faf6ff;border-color:#c8b6e0}
+@media(max-width:420px) {.home-title{font-size:22px}.welcome-art{height:175px}.entry-card{padding:13px 11px}.entry-copy strong{font-size:13px}}
+
+
+/* Reference-image inspired landing page */
+.hero-art {display:block;width:100%;max-width:none;height:auto;object-fit:cover;margin:16px auto 20px;border-radius:24px}
+#startScreen {text-align:left}
+#startScreen .pill {display:none}
+#startScreen h1 {font-size:clamp(23px,5vw,31px);line-height:1.55;font-weight:750;color:#626262;margin:0 0 12px}
+#startScreen .start-question {text-align:center;font-size:clamp(24px,5vw,32px);font-weight:800;color:#111;margin:22px 0 25px}
+#startScreen .choice, #startScreen button.choice {
+  position:relative;display:flex;align-items:center;gap:16px;
+  min-height:138px;margin-top:18px;padding:22px 22px;
+  border:1.5px solid #e7e5e3;border-radius:25px;background:#fff;
+  box-shadow:none;color:#111;text-align:left;
+}
+#startScreen .choice .choice-icon {flex:0 0 42px;color:#b18498;font-size:30px;text-align:center}
+#startScreen .choice h3 {font-size:clamp(18px,4.5vw,25px);line-height:1.5;font-weight:800;color:#111;margin:0 0 8px}
+#startScreen .choice p {font-size:clamp(15px,3.7vw,20px);line-height:1.65;color:#666;margin:0}
+#startScreen .choice:after {content:"›";font-size:34px;line-height:1;color:#777;margin-left:auto;padding-left:2px}
+#startScreen .choice > * {min-width:0}
+#startScreen .choice:hover {background:#fffdfb;border-color:#d9c6ce;transform:translateY(-1px)}
+#startScreen .pair-entry {display:block;text-align:center;margin:20px auto 0;color:#8b7780;font-size:13px}
+@media(max-width:420px) {
+  body {padding:8px 8px 24px}
+  .container {max-width:100%}
+  header {padding-top:10px}
+  .logo {font-size:45px}
+  .card {padding:20px 14px;border-radius:28px}
+  #startScreen .choice, #startScreen button.choice {padding:18px 14px;gap:10px;min-height:125px}
+  #startScreen .choice .choice-icon {flex-basis:32px;font-size:25px}
+}
+
 </style>
 </head>
 <body>
@@ -90,53 +152,62 @@ p {margin:8px 0 14px}
 
 <main class="card">
 
-<!-- トップ -->
+<!-- トップ：新しいTONEの入口 -->
 <section id="startScreen" class="center">
   <span class="pill">FIND YOUR OWN TONE</span>
-  <svg class="art" viewBox="0 0 320 205" role="img" aria-label="パステルカラーのお花と星">
-    <circle cx="160" cy="103" r="76" fill="#f7effd"/>
-    <circle cx="160" cy="103" r="54" fill="#fff8ef"/>
-    <path d="M75 44l5 13 14 2-11 9 3 14-11-8-12 8 4-14-11-9 14-2z" fill="#f5d58c"/>
-    <path d="M243 39l4 10 11 2-9 7 2 11-8-6-9 6 3-11-9-7 11-2z" fill="#d9c8f4"/>
-    <path d="M250 117l3 7 8 2-7 5 2 8-6-5-7 5 2-8-6-5 8-2z" fill="#f4bfd1"/>
-    <path d="M156 179Q137 145 115 130M191 180Q194 150 213 132" fill="none" stroke="#9dbda3" stroke-width="3" stroke-linecap="round"/>
-    <path d="M141 157Q116 153 111 135Q134 136 141 157M150 169Q154 144 176 139Q175 161 150 169M199 158Q216 148 218 132Q199 137 199 158" fill="#b9d8bd"/>
-    <g transform="translate(111 116)">
-      <ellipse cy="-14" rx="9" ry="14" fill="#f3bfd3"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f8d4e0" transform="rotate(60)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f3bfd3" transform="rotate(120)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f8d4e0" transform="rotate(180)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f3bfd3" transform="rotate(240)"/>
-      <ellipse cy="-14" rx="9" ry="14" fill="#f8d4e0" transform="rotate(300)"/>
-      <circle r="10" fill="#f3d17d"/>
-    </g>
-    <g transform="translate(160 87)">
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(45)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4" transform="rotate(90)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(135)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4" transform="rotate(180)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(225)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#d9c7f4" transform="rotate(270)"/>
-      <ellipse cy="-22" rx="13" ry="20" fill="#e5d8fa" transform="rotate(315)"/>
-      <circle r="15" fill="#f5d88d"/>
-    </g>
-    <g transform="translate(213 121)">
-      <ellipse cy="-12" rx="8" ry="12" fill="#f6d5a4"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#fce6bc" transform="rotate(60)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#f6d5a4" transform="rotate(120)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#fce6bc" transform="rotate(180)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#f6d5a4" transform="rotate(240)"/>
-      <ellipse cy="-12" rx="8" ry="12" fill="#fce6bc" transform="rotate(300)"/>
-      <circle r="8" fill="#e9c878"/>
-    </g>
-  </svg>
-  <h1>あなたらしさと、<br>ふたりの相性を見つけよう</h1>
-  <p>10問の2択で、自分のことや大切な人との関係を楽しく発見。</p>
-  <p class="muted">正解も不正解もないから、直感で選んでね。</p>
-  <button class="primary" id="soloStart">🌷 ひとりで診断する</button>
-  <button class="secondary" id="pairStart">💕 ふたりで相性診断</button>
-  <p class="small">ふたり診断は、同じ端末で順番に回答するお試し版です。</p>
+  <div class="welcome-art" aria-hidden="true">
+    <div class="soft-orbit"></div>
+    <span class="spark spark-one">✦</span><span class="spark spark-two">✧</span>
+    <div class="person person-left"><span class="hair"></span><span class="face"></span><span class="body"></span></div>
+    <div class="person person-right"><span class="hair"></span><span class="face"></span><span class="body"></span></div>
+    <span class="tiny-heart">♡</span>
+  </div>
+  <h1 class="home-title">自分を知る。相手を理解する。<br>伝え方を見つける。</h1>
+  <p class="home-lead">気持ちを言葉にして、ふたりの関係を育てるコミュニケーションナビ。</p>
+  <p class="muted">今日は、どこから始める？</p>
+  <button class="entry-card entry-diagnosis" id="soloStart">
+    <span class="entry-icon">✿</span><span class="entry-copy"><strong>自分のことをもっと知りたい</strong><small>性格・恋愛傾向・人との関わり方を診断</small></span><span class="entry-arrow">›</span>
+  </button>
+  <button class="entry-card entry-consult" id="consultStart">
+    <span class="entry-icon">♡</span><span class="entry-copy"><strong>今の悩みを相談したい</strong><small>選択肢から気持ちを整理して、伝え方を見つける</small></span><span class="entry-arrow">›</span>
+  </button>
+  <button class="text-link" id="pairStart">💕 ふたりで相性診断はこちら</button>
+  <p class="small">答えに正解・不正解はありません。自分のペースで進めてね。</p>
+</section>
+
+<!-- 選択式の相談 -->
+<section id="consultScreen" class="hidden">
+  <div class="center">
+    <span class="pill">TONE TALK</span>
+    <h1>今、気になっていることは？</h1>
+    <p>うまく説明できなくても大丈夫。近いものを選んでね。</p>
+  </div>
+  <div class="consult-options">
+    <button class="choice consult-topic" data-topic="伝え方"><span class="letter">♡</span><span class="choice-text"><strong>自分の気持ちや希望を伝えたい</strong><small>お願い・不満・本音をどう話すか</small></span></button>
+    <button class="choice consult-topic" data-topic="相手の気持ち"><span class="letter">？</span><span class="choice-text"><strong>相手がどう思っているのかわからない</strong><small>連絡・態度・気持ちのすれ違い</small></span></button>
+    <button class="choice consult-topic" data-topic="すれ違い"><span class="letter">✿</span><span class="choice-text"><strong>ケンカやすれ違いを解消したい</strong><small>誤解・言い合い・仲直り</small></span></button>
+    <button class="choice consult-topic" data-topic="距離感"><span class="letter">☾</span><span class="choice-text"><strong>距離感やスキンシップについて悩んでいる</strong><small>ふたりにとって心地よい関係</small></span></button>
+    <button class="choice consult-topic" data-topic="その他"><span class="letter">✧</span><span class="choice-text"><strong>うまく言えないけれど、モヤモヤする</strong><small>選びながら気持ちを整理しよう</small></span></button>
+  </div>
+  <button class="secondary" id="consultBack">トップに戻る</button>
+</section>
+
+<section id="consultQuestions" class="hidden">
+  <div class="center"><span class="pill">LET'S SORT IT OUT</span><h1 id="consultQuestionTitle">少しだけ、気持ちを整理しよう</h1><p id="consultQuestionIntro"></p></div>
+  <p class="question" id="consultQuestionText"></p>
+  <div id="consultAnswerOptions"></div>
+  <button class="secondary" id="consultQuestionBack">相談テーマに戻る</button>
+</section>
+
+<section id="consultResult" class="hidden">
+  <div class="center"><span class="pill">YOUR NEXT STEP</span><h1>あなたの気持ちを、言葉にしてみよう</h1></div>
+  <div class="result-section strength"><h3>✧ 今の気持ちの整理</h3><p id="consultSummary"></p></div>
+  <div class="result-section relationship"><h3>✧ 伝えるときのヒント</h3><p id="consultTip"></p></div>
+  <div class="result-section love"><h3>✧ こんな言い方もできる</h3><p id="consultPhrase"></p></div>
+  <p class="small">これは会話を始めるためのヒントです。相手の気持ちは決めつけず、お互いの意思や境界線を大切にしてください。</p>
+  <button class="primary" id="consultContinue">もう少し気持ちを整理する</button>
+  <button class="secondary" id="consultAgain">別の悩みを相談する</button>
+  <button class="secondary" id="consultHome">トップに戻る</button>
 </section>
 
 <!-- ふたり診断の設定 -->
@@ -171,23 +242,7 @@ p {margin:8px 0 14px}
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
   </div>
   <div class="center">
-    <svg class="question-art" viewBox="0 0 160 105" role="img" aria-label="小さなお花ときらめき">
-      <circle cx="80" cy="53" r="39" fill="#f8f0fc"/>
-      <path d="M80 84V44" stroke="#9fbea2" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M80 72Q59 69 57 52Q76 53 80 72M80 63Q98 58 102 43Q85 44 80 63" fill="#c7e0c5"/>
-      <g transform="translate(80 36)">
-        <ellipse cy="-12" rx="8" ry="12" fill="#d8c5f2"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#eadcf8" transform="rotate(60)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#d8c5f2" transform="rotate(120)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#eadcf8" transform="rotate(180)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#d8c5f2" transform="rotate(240)"/>
-        <ellipse cy="-12" rx="8" ry="12" fill="#eadcf8" transform="rotate(300)"/>
-        <circle r="8" fill="#f4d582"/>
-      </g>
-      <path d="M35 22l3 7 7 2-7 3-3 7-3-7-7-3 7-2z" fill="#f1c4d7"/>
-      <path d="M124 18l3 7 7 2-7 3-3 7-3-7-7-3 7-2z" fill="#cdb8ec"/>
-      <circle cx="119" cy="76" r="3" fill="#f0d68c"/>
-    </svg>
+    <img class="hero-art" src="tone-hero-illustration.png" alt="向き合う二人の線画とハート">
     <span class="pill" id="categoryLabel">行動スタイル</span>
     <p id="whoLabel" class="small"></p>
   </div>
@@ -382,7 +437,7 @@ let answers = [[],[]];
 const $ = id => document.getElementById(id);
 
 function showScreen(id) {
- ["startScreen","pairSetup","quizScreen","betweenScreen","resultScreen"].forEach(screenId => {
+ ["startScreen","pairSetup","quizScreen","betweenScreen","resultScreen","consultScreen","consultQuestions","consultResult"].forEach(screenId => {
   $(screenId).classList.toggle("hidden",screenId !== id);
  });
  window.scrollTo({top:0,behavior:"smooth"});
@@ -650,6 +705,84 @@ async function shareResult() {
   await copyText(text,"結果とURLをコピーしました！LINEなどに貼り付けてね。");
  }
 }
+
+
+// 選択式の悩み相談（まずはルールベースの試作版）
+let consultTopic = "";
+let consultStep = 0;
+let consultAnswers = [];
+const consultPrompts = {
+ "伝え方": [
+  {q:"いちばん近い気持ちは？",a:["本当はこうしてほしい","嫌だったことをわかってほしい","気持ちを聞いてほしい","自分でも何を望んでいるか整理したい"]},
+  {q:"伝えるとき、何が心配？",a:["相手を傷つけそう","重いと思われそう","ケンカになりそう","うまく言葉にできなさそう"]},
+  {q:"今の関係に近いのは？",a:["普段は話し合える","大事な話は避けがち","最近すれ違いが多い","まだ関係がはっきりしていない"]}
+ ],
+ "相手の気持ち": [
+  {q:"何がいちばん気になっている？",a:["連絡の頻度や返信","態度が前と違う","好かれているか不安","本音を話してくれない"]},
+  {q:"今、あなたはどうしている？",a:["自分から聞いてみた","気になるけど聞けない","何度も考えてしまう","少し距離を置いている"]},
+  {q:"今、知りたいことは？",a:["相手の考えを直接聞きたい","自分の不安を落ち着けたい","これからどうしたいか決めたい","どう切り出すか考えたい"]}
+ ],
+ "すれ違い": [
+  {q:"すれ違いのきっかけは？",a:["言い方や受け取り方","連絡や会う頻度","考え方や価値観","何が原因か自分でもわからない"]},
+  {q:"今の気持ちに近いのは？",a:["わかってほしい","相手の話も聞きたい","傷ついていて話しづらい","仲直りしたいけどきっかけがない"]},
+  {q:"今、できそうなことは？",a:["落ち着いて話す","まずメッセージで伝える","少し時間を置く","何を伝えたいか整理する"]}
+ ],
+ "距離感": [
+  {q:"どんなことが気になっている？",a:["一緒に過ごす時間の差","スキンシップの好みや頻度","自分の希望を言い出せない","断ったり断られたりするのが不安"]},
+  {q:"希望を話すことについて？",a:["話したいけど言葉が見つからない","嫌な思いをさせそうで心配","相手の希望も知りたい","まず自分の気持ちを整理したい"]},
+  {q:"大切にしたいことは？",a:["お互いが安心できること","無理せず本音を言えること","ふたりの折り合いを見つけること","相手の意思も自分の意思も尊重すること"]}
+ ],
+ "その他": [
+  {q:"モヤモヤに近いものは？",a:["寂しさや不安","言いたいことを我慢している","相手との温度差","理由はわからないけど気になる"]},
+  {q:"今、いちばん必要なのは？",a:["気持ちを整理すること","相手に伝える言葉","相手の考えを知ること","次にどうするか決めること"]},
+  {q:"今の状態に近いのは？",a:["まずは自分の気持ちを知りたい","話し合う準備をしたい","相手の反応が心配","少しずつ関係をよくしたい"]}
+ ]
+};
+function beginConsult(topic) {
+  consultTopic = topic; consultStep = 0; consultAnswers = [];
+  renderConsultQuestion(); showScreen("consultQuestions");
+}
+function renderConsultQuestion() {
+  const prompts = consultPrompts[consultTopic] || consultPrompts["その他"];
+  const item = prompts[consultStep];
+  $("consultQuestionTitle").textContent = `${consultTopic}について`;
+  $("consultQuestionIntro").textContent = `質問 ${consultStep+1} / ${prompts.length} · いちばん近いものを選んでね`;
+  $("consultQuestionText").textContent = item.q;
+  const holder = $("consultAnswerOptions"); holder.innerHTML = "";
+  item.a.forEach((answer,index) => {
+    const button = document.createElement("button");
+    button.className = "consult-answer";
+    button.textContent = answer;
+    button.addEventListener("click", () => {
+      consultAnswers[consultStep] = answer;
+      if (consultStep < prompts.length - 1) { consultStep++; renderConsultQuestion(); }
+      else { renderConsultResult(); showScreen("consultResult"); }
+    });
+    holder.appendChild(button);
+  });
+}
+function renderConsultResult() {
+  const a = consultAnswers;
+  const worry = a[0] || "自分の気持ち";
+  const concern = a[1] || "うまく伝えられるか";
+  const context = a[2] || "これからの関係";
+  $("consultSummary").textContent = `今回の回答からは、「${worry}」という気持ちがありつつ、「${concern}」も気になっているようです。すぐに結論を出さなくても大丈夫。まずは、自分が何を大切にしたいのかを整理するところから始めてみましょう。`;
+  $("consultTip").textContent = `相手の気持ちを決めつけず、「私はこう感じている」と自分を主語にして話すのがおすすめです。落ち着いて話せるタイミングを選び、相手の考えを聞く余白も残してみてください。`;
+  let phrase = `「少し話したいことがあるんだ。責めたいわけではなくて、私は${worry}と感じているから、あなたの考えも聞いてみたいな。」`;
+  if (consultTopic === "距離感") phrase = `「ふたりとも無理せず安心していられる関係にしたいな。私は${worry}と感じることがあるんだけど、あなたはどう感じている？話せる範囲で聞かせてほしい。」`;
+  if (consultTopic === "すれ違い") phrase = `「この前のこと、もう少し落ち着いて話せたらうれしい。私は${worry}と感じていたんだ。あなたがどう受け取ったかも聞かせてくれる？」`;
+  if (consultTopic === "相手の気持ち") phrase = `「最近ちょっと気になっていることがあって、決めつけずに聞いてみたいんだ。今、どんなふうに感じているか話せる？」`;
+  $("consultPhrase").textContent = phrase;
+}
+
+
+$("consultStart").addEventListener("click",() => showScreen("consultScreen"));
+document.querySelectorAll(".consult-topic").forEach(button => button.addEventListener("click",() => beginConsult(button.dataset.topic)));
+$("consultBack").addEventListener("click",() => showScreen("startScreen"));
+$("consultQuestionBack").addEventListener("click",() => showScreen("consultScreen"));
+$("consultContinue").addEventListener("click",() => { consultStep = 0; consultAnswers = []; renderConsultQuestion(); showScreen("consultQuestions"); });
+$("consultAgain").addEventListener("click",() => showScreen("consultScreen"));
+$("consultHome").addEventListener("click",() => showScreen("startScreen"));
 
 $("soloStart").addEventListener("click",startSolo);
 $("pairStart").addEventListener("click",() => showScreen("pairSetup"));
